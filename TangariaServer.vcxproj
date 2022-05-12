@@ -24,8 +24,8 @@
     <Keyword>MFCProj</Keyword>
     <RootNamespace>MFCApp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <RootNamespace>AngBand</RootNamespace>
-    <ProjectName>Angband</ProjectName>
+    <RootNamespace>Mangband</RootNamespace>
+    <ProjectName>mangband</ProjectName>
     <PlatformToolset>v142</PlatformToolset>
     <!-- 142 for VS2019(Default);143 for VS2022-->
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '16' Or '$(VisualStudioVersion)' == ''">v142</PlatformToolset>
@@ -67,72 +67,39 @@
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\SPClient\win\'))</WinIncludeRoot>
     <LibSrcDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibSrcDir>
   </PropertyGroup>
-  <!--Use Integrated version of the code if GitProject of ZLib not found in parent of root-->
-  <!--Open Visual Studio 2022 and build via nmake-->
-  <!--Or just use Visual Studio project in Contribution/vs16 folder-->
-  <!--
-  <Choose>
-    <When Condition="Exists('$(ParentOfRoot)\zlib-win64\zlib.h') And (Exists('$(ParentOfRoot)zlib-win64\out\build\$(Platform)-$(Configuration)\zlib.lib') Or Exists('$(ParentOfRoot)zlib-win64\$(Platform)\$(Configuration)\zlib.lib'))">
-      <PropertyGroup>
-        <ZLibLocType>X64</ZLibLocType>
-        <ZLibDir>$(ParentOfRoot)zlib-win64\</ZLibDir>
-        <ZLibLibrary Condition="$(ZLibLibrary)=='' And Exists('$(ParentOfRoot)\zlib\out\build\$(Platform)-$(Configuration)\zlib.lib')">$(ZLibDir)$(Platform)\$(Configuration)\zlib.lib</ZLibLibrary>
-        <ZLibLibrary Condition="$(ZLibLibrary)=='' And Exists('$(ZLibDir)$(Platform)\$(Configuration)\zlib.lib')">$(ZLibDir)$(Platform)\$(Configuration)\zlib.lib</ZLibLibrary>
-        <ZLibLibrary Condition="$(ZLibLibrary)==''">$(ZLibDir)$(Platform)\$(Configuration)\zlib.lib</ZLibLibrary>
-      </PropertyGroup>
-    </When>
-    <When Condition="Exists('$(ParentOfRoot)\zlib\out\build\$(Platform)-$(Configuration)\zlib.lib') And Exists('$(ParentOfRoot)zlib\out\build\$(Platform)-$(Configuration)\zlib.lib')">
-      <PropertyGroup>
-        <ZLibLocType>Normal</ZLibLocType>
-        <ZLibDir>$(ParentOfRoot)zlib\</ZLibDir>
-        <ZLibLibrary>$(ZLibDir)out\build\$(Platform)-$(Configuration)\zlib.lib</ZLibLibrary>-->
-  <!--<ZLibDLL>$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll</ZLibDLL>-->
-  <!--
-      </PropertyGroup>
-    </When>
-    <Otherwise>
--->
   <PropertyGroup>
     <ZLibLocType>Integrated</ZLibLocType>
     <ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedZLib\'))</ZLibDir>
     <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\zlib.lib'))</ZLibLibrary>
     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
-  <!--
-    </Otherwise>
-  </Choose>
--->
-  <!--Use Integrated version of the code if GitProject of LibPng not found in parent of root-->
-  <!--
-   <Choose>
-	  <When Condition="Exists('$(ParentOfRoot)\libpng\$(Platform)\$(Configuration)\libpng.lib')">
-		<PropertyGroup>
-		  <LibPngLocType>Normal</LibPngLocType>
-		  <LibPngDir>$(ParentOfRoot)libpng\</LibPngDir>
-		  <LibPngLibrary>$(LibPngDir)$(Platform)\$(Configuration)\libpng.lib</LibPngLibrary>
-          <LibPngDLL>$(LibPngDir)$(Platform)\$(Configuration)\libpng.dll</LibPngDLL>
-		</PropertyGroup>
-	  </When>
-	  <When Condition="Exists('$(ParentOfRoot)\libpng\$(Platform)\$(Configuration)\libpng16.lib')">
-		<PropertyGroup>
-		  <LibPngLocType>Normal</LibPngLocType>
-		  <LibPngDir>$(ParentOfRoot)libpng\</LibPngDir>
-		  <LibPngLibrary>$(LibPngDir)$(Platform)\$(Configuration)\libpng16.lib</LibPngLibrary>
-          <LibPngDLL>$(LibPngDir)$(Platform)\$(Configuration)\libpng16.dll</LibPngDLL>
-		</PropertyGroup>
-	  </When>
-	  <Otherwise>
--->
   <PropertyGroup>
     <LibPngLocType>Integrated</LibPngLocType>
     <LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedLibPng\'))</LibPngDir>
     <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
-  <!--
-	  </Otherwise>
-  </Choose>
--->
+  <PropertyGroup>
+<!--     <SDLLocType>Integrated</SDLLocType> -->
+    <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
+    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL.lib'))</LibPngLibrary>
+    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_image.lib'))</SDLLibrary>
+    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
+    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
+    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
+    <!--<SDLDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\SDL.dll'))</SDLDLL>-->
+  </PropertyGroup>
+ <!-- Use either SDL 1.X or SDL 2.X files-->
+ <!-- (SDL 2.X Properties here--
+  <PropertyGroup>
+    <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
+    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2.lib'))</LibPngLibrary>
+    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_image.lib'))</SDLLibrary>
+    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
+    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
+    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
+  </PropertyGroup>
+ -->
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(ZLibDir);$(LibPngDir)</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)..\lib\um\x86;</LibraryPath>
@@ -172,396 +139,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">$(ZLibLibrary);$(LibPngLibrary);msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)'=='Release'">$(ZLibLibrary);$(LibPngLibrary);msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libcmt.lib</IgnoreSpecificDefaultLibraries>
-      <IgnoreSpecificDefaultLibraries Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libcmt.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
-    <CustomBuildStep Condition="'$(LibraryConfiguration)'=='Debug'">
-      <Command>xcopy  "$(MSBuildProjectDirectory)\..\..\lib" "$(OutDir)lib" /s /e /y /d</Command>
-    </CustomBuildStep>
-    <CustomBuildStep Condition="'$(LibraryConfiguration)'=='Debug' And '$(ZLibLocType)'=='Integrated'">
-      <Command>xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\zlib.dll $(OutDir) /DY </Command>
-    </CustomBuildStep>
-    <CustomBuildStep Condition="'$(LibraryConfiguration)'=='Debug' And '$(LibPngLocType)'=='Integrated'">
-      <Command Condition="'$(LibPngLocType)'=='Integrated'">xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\libpng.dll $(OutDir) /DY </Command>
-    </CustomBuildStep>
-    <!--
-    <CustomBuildStep Condition="'$(LibraryConfiguration)'=='Debug'">
-      <Outputs>$(OutDir)suppress_post_build.txt</Outputs>
-    </CustomBuildStep>
--->
-    <!--
-    <PostBuildEvent Condition="'$(LibraryConfiguration)'=='Release'">
-      <Command>xcopy $(LibSrcDir)\* $(OutDir)..\lib\ /DESY /exclude:$(LibSrcDir)\xcopy_exclude.txt</Command>
-      <Command Condition="'$(ZLibLocType)'=='Integrated'">xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\zlib.dll $(OutDir) /DY </Command>
-      <Command Condition="'$(LibPngLocType)'=='Integrated'">xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\libpng.dll $(OutDir) /DY </Command>
-    </PostBuildEvent>
--->
-    <PostBuildEvent Condition="'$(LibraryConfiguration)'=='Release' And ('$(ZLibLocType)'!='Integrated' And '$(LibPngLocType)'!='Integrated')">
-      <Command>xcopy $(LibSrcDir)\* $(OutDir)..\lib\ /DESY /exclude:$(LibSrcDir)\xcopy_exclude.txt</Command>
-    </PostBuildEvent>
-    <PostBuildEvent Condition="'$(LibraryConfiguration)'=='Release' And ('$(ZLibLocType)'=='Integrated' And '$(LibPngLocType)'!='Integrated')">
-      <Command>xcopy $(MSBuildProjectDirectory)\src\win\dll\*.dll $(OutDir) /DY 
-xcopy $(ZLibDLL) $(OutDir)lib\ /DESY /exclude:$(MSBuildProjectDirectory)\lib\xcopy_exclude.txt</Command>
-    </PostBuildEvent>
-    <PostBuildEvent Condition="'$(LibraryConfiguration)'=='Release' And ('$(ZLibLocType)'!='Integrated' And '$(LibPngLocType)'=='Integrated')">
-      <Command>xcopy $(MSBuildProjectDirectory)\src\win\dll\*.dll $(OutDir) /DY 
-xcopy $(LibPngDLL) $(OutDir)lib\ /DESY /exclude:$(MSBuildProjectDirectory)\lib\xcopy_exclude.txt</Command>
-    </PostBuildEvent>
-    <PostBuildEvent Condition="'$(LibraryConfiguration)'=='Release' And ('$(ZLibLocType)'=='Integrated' And '$(LibPngLocType)'=='Integrated')">
-      <Command>xcopy $(MSBuildProjectDirectory)\src\win\dll\*.dll $(OutDir) /DY 
-xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\* $(OutDir)lib\ /DESY /exclude:$(MSBuildProjectDirectory)\lib\xcopy_exclude.txt</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\SPClient\buildid.c" />
-    <ClCompile Include="..\SPClient\cave-map.c" />
-    <ClCompile Include="..\SPClient\cave-square.c" />
-    <ClCompile Include="..\SPClient\cave-view.c" />
-    <ClCompile Include="..\SPClient\cave.c" />
-    <ClCompile Include="..\SPClient\cmd-cave.c" />
-    <ClCompile Include="..\SPClient\cmd-core.c" />
-    <ClCompile Include="..\SPClient\cmd-misc.c" />
-    <ClCompile Include="..\SPClient\cmd-obj.c" />
-    <ClCompile Include="..\SPClient\cmd-pickup.c" />
-    <ClCompile Include="..\SPClient\cmd-spoil.c" />
-    <ClCompile Include="..\SPClient\cmd-wizard.c" />
-    <ClCompile Include="..\SPClient\datafile.c" />
-    <ClCompile Include="..\SPClient\debug.c" />
-    <ClCompile Include="..\SPClient\effect-handler-attack.c" />
-    <ClCompile Include="..\SPClient\effect-handler-general.c" />
-    <ClCompile Include="..\SPClient\effects-info.c" />
-    <ClCompile Include="..\SPClient\effects.c" />
-    <ClCompile Include="..\SPClient\game-event.c" />
-    <ClCompile Include="..\SPClient\game-input.c" />
-    <ClCompile Include="..\SPClient\game-world.c" />
-    <ClCompile Include="..\SPClient\gen-cave.c" />
-    <ClCompile Include="..\SPClient\gen-chunk.c" />
-    <ClCompile Include="..\SPClient\gen-monster.c" />
-    <ClCompile Include="..\SPClient\gen-room.c" />
-    <ClCompile Include="..\SPClient\gen-util.c" />
-    <ClCompile Include="..\SPClient\generate.c" />
-    <ClCompile Include="..\SPClient\grafmode.c" />
-    <ClCompile Include="..\SPClient\guid.c" />
-    <ClCompile Include="..\SPClient\init.c" />
-    <ClCompile Include="..\SPClient\load.c" />
-    <ClCompile Include="..\SPClient\main-win.c" />
-    <ClCompile Include="..\SPClient\message.c" />
-    <ClCompile Include="..\SPClient\mon-attack.c" />
-    <ClCompile Include="..\SPClient\mon-blows.c" />
-    <ClCompile Include="..\SPClient\mon-desc.c" />
-    <ClCompile Include="..\SPClient\mon-group.c" />
-    <ClCompile Include="..\SPClient\mon-init.c" />
-    <ClCompile Include="..\SPClient\mon-list.c" />
-    <ClCompile Include="..\SPClient\mon-lore.c" />
-    <ClCompile Include="..\SPClient\mon-make.c" />
-    <ClCompile Include="..\SPClient\mon-move.c" />
-    <ClCompile Include="..\SPClient\mon-msg.c" />
-    <ClCompile Include="..\SPClient\mon-predicate.c" />
-    <ClCompile Include="..\SPClient\mon-spell.c" />
-    <ClCompile Include="..\SPClient\mon-summon.c" />
-    <ClCompile Include="..\SPClient\mon-timed.c" />
-    <ClCompile Include="..\SPClient\mon-util.c" />
-    <ClCompile Include="..\SPClient\obj-chest.c" />
-    <ClCompile Include="..\SPClient\obj-curse.c" />
-    <ClCompile Include="..\SPClient\obj-desc.c" />
-    <ClCompile Include="..\SPClient\obj-gear.c" />
-    <ClCompile Include="..\SPClient\obj-ignore.c" />
-    <ClCompile Include="..\SPClient\obj-info.c" />
-    <ClCompile Include="..\SPClient\obj-init.c" />
-    <ClCompile Include="..\SPClient\obj-knowledge.c" />
-    <ClCompile Include="..\SPClient\obj-list.c" />
-    <ClCompile Include="..\SPClient\obj-make.c" />
-    <ClCompile Include="..\SPClient\obj-pile.c" />
-    <ClCompile Include="..\SPClient\obj-power.c" />
-    <ClCompile Include="..\SPClient\obj-properties.c" />
-    <ClCompile Include="..\SPClient\obj-randart.c" />
-    <ClCompile Include="..\SPClient\obj-slays.c" />
-    <ClCompile Include="..\SPClient\obj-tval.c" />
-    <ClCompile Include="..\SPClient\obj-util.c" />
-    <ClCompile Include="..\SPClient\option.c" />
-    <ClCompile Include="..\SPClient\parser.c" />
-    <ClCompile Include="..\SPClient\player-attack.c" />
-    <ClCompile Include="..\SPClient\player-birth.c" />
-    <ClCompile Include="..\SPClient\player-calcs.c" />
-    <ClCompile Include="..\SPClient\player-class.c" />
-    <ClCompile Include="..\SPClient\player-history.c" />
-    <ClCompile Include="..\SPClient\player-path.c" />
-    <ClCompile Include="..\SPClient\player-properties.c" />
-    <ClCompile Include="..\SPClient\player-quest.c" />
-    <ClCompile Include="..\SPClient\player-race.c" />
-    <ClCompile Include="..\SPClient\player-spell.c" />
-    <ClCompile Include="..\SPClient\player-timed.c" />
-    <ClCompile Include="..\SPClient\player-util.c" />
-    <ClCompile Include="..\SPClient\player.c" />
-    <ClCompile Include="..\SPClient\project-feat.c" />
-    <ClCompile Include="..\SPClient\project-mon.c" />
-    <ClCompile Include="..\SPClient\project-obj.c" />
-    <ClCompile Include="..\SPClient\project-player.c" />
-    <ClCompile Include="..\SPClient\project.c" />
-    <ClCompile Include="..\SPClient\randname.c" />
-    <ClCompile Include="..\SPClient\save-charoutput.c" />
-    <ClCompile Include="..\SPClient\save.c" />
-    <ClCompile Include="..\SPClient\savefile.c" />
-    <ClCompile Include="..\SPClient\score.c" />
-    <ClCompile Include="..\SPClient\sound-core.c" />
-    <ClCompile Include="..\SPClient\source.c" />
-    <ClCompile Include="..\SPClient\store.c" />
-    <ClCompile Include="..\SPClient\target.c" />
-    <ClCompile Include="..\SPClient\trap.c" />
-    <ClCompile Include="..\SPClient\ui-birth.c" />
-    <ClCompile Include="..\SPClient\ui-command.c" />
-    <ClCompile Include="..\SPClient\ui-context.c" />
-    <ClCompile Include="..\SPClient\ui-curse.c" />
-    <ClCompile Include="..\SPClient\ui-death.c" />
-    <ClCompile Include="..\SPClient\ui-display.c" />
-    <ClCompile Include="..\SPClient\ui-effect.c" />
-    <ClCompile Include="..\SPClient\ui-entry-combiner.c" />
-    <ClCompile Include="..\SPClient\ui-entry-renderers.c" />
-    <ClCompile Include="..\SPClient\ui-entry.c" />
-    <ClCompile Include="..\SPClient\ui-equip-cmp.c" />
-    <ClCompile Include="..\SPClient\ui-event.c" />
-    <ClCompile Include="..\SPClient\ui-game.c" />
-    <ClCompile Include="..\SPClient\ui-help.c" />
-    <ClCompile Include="..\SPClient\ui-history.c" />
-    <ClCompile Include="..\SPClient\ui-init.c" />
-    <ClCompile Include="..\SPClient\ui-input.c" />
-    <ClCompile Include="..\SPClient\ui-keymap.c" />
-    <ClCompile Include="..\SPClient\ui-knowledge.c" />
-    <ClCompile Include="..\SPClient\ui-map.c" />
-    <ClCompile Include="..\SPClient\ui-menu.c" />
-    <ClCompile Include="..\SPClient\ui-mon-list.c" />
-    <ClCompile Include="..\SPClient\ui-mon-lore.c" />
-    <ClCompile Include="..\SPClient\ui-obj-list.c" />
-    <ClCompile Include="..\SPClient\ui-object.c" />
-    <ClCompile Include="..\SPClient\ui-options.c" />
-    <ClCompile Include="..\SPClient\ui-output.c" />
-    <ClCompile Include="..\SPClient\ui-player-properties.c" />
-    <ClCompile Include="..\SPClient\ui-player.c" />
-    <ClCompile Include="..\SPClient\ui-prefs.c" />
-    <ClCompile Include="..\SPClient\ui-score.c" />
-    <ClCompile Include="..\SPClient\ui-signals.c" />
-    <ClCompile Include="..\SPClient\ui-spell.c" />
-    <ClCompile Include="..\SPClient\ui-spoil.c" />
-    <ClCompile Include="..\SPClient\ui-store.c" />
-    <ClCompile Include="..\SPClient\ui-target.c" />
-    <ClCompile Include="..\SPClient\ui-term.c" />
-    <ClCompile Include="..\SPClient\ui-visuals.c" />
-    <ClCompile Include="..\SPClient\ui-wizard.c" />
-    <ClCompile Include="..\SPClient\win\readdib.c">
-    </ClCompile>
-    <ClCompile Include="..\SPClient\win\readpng.c">
-    </ClCompile>
-    <ClCompile Include="..\SPClient\win\scrnshot.c" />
-    <ClCompile Include="..\SPClient\win\win-layout.c" />
-    <ClCompile Include="..\SPClient\wiz-debug.c" />
-    <ClCompile Include="..\SPClient\wiz-spoil.c" />
-    <ClCompile Include="..\SPClient\wiz-stats.c" />
-    <ClCompile Include="..\SPClient\z-bitflag.c" />
-    <ClCompile Include="..\SPClient\z-color.c" />
-    <ClCompile Include="..\SPClient\z-dice.c" />
-    <ClCompile Include="..\SPClient\z-expression.c" />
-    <ClCompile Include="..\SPClient\z-file.c" />
-    <ClCompile Include="..\SPClient\z-form.c" />
-    <ClCompile Include="..\SPClient\z-quark.c" />
-    <ClCompile Include="..\SPClient\z-queue.c" />
-    <ClCompile Include="..\SPClient\z-rand.c" />
-    <ClCompile Include="..\SPClient\z-set.c" />
-    <ClCompile Include="..\SPClient\z-textblock.c" />
-    <ClCompile Include="..\SPClient\z-type.c" />
-    <ClCompile Include="..\SPClient\z-util.c" />
-    <ClCompile Include="..\SPClient\z-virt.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\SPClient\alloc.h" />
-    <ClInclude Include="..\SPClient\angband.h" />
-    <ClInclude Include="..\SPClient\buildid.h" />
-    <ClInclude Include="..\SPClient\cave.h" />
-    <ClInclude Include="..\SPClient\cmd-core.h" />
-    <ClInclude Include="..\SPClient\cmds.h" />
-    <ClInclude Include="..\SPClient\config.h" />
-    <ClInclude Include="..\SPClient\datafile.h" />
-    <ClInclude Include="..\SPClient\debug.h" />
-    <ClInclude Include="..\SPClient\effect-handler.h" />
-    <ClInclude Include="..\SPClient\effects-info.h" />
-    <ClInclude Include="..\SPClient\effects.h" />
-    <ClInclude Include="..\SPClient\game-event.h" />
-    <ClInclude Include="..\SPClient\game-input.h" />
-    <ClInclude Include="..\SPClient\game-world.h" />
-    <ClInclude Include="..\SPClient\generate.h" />
-    <ClInclude Include="..\SPClient\grafmode.h" />
-    <ClInclude Include="..\SPClient\guid.h" />
-    <ClInclude Include="..\SPClient\h-basic.h" />
-    <ClInclude Include="..\SPClient\hint.h" />
-    <ClInclude Include="..\SPClient\init.h" />
-    <ClInclude Include="..\SPClient\list-dun-profiles.h" />
-    <ClInclude Include="..\SPClient\list-effects.h" />
-    <ClInclude Include="..\SPClient\list-elements.h" />
-    <ClInclude Include="..\SPClient\list-equip-slots.h" />
-    <ClInclude Include="..\SPClient\list-history-types.h" />
-    <ClInclude Include="..\SPClient\list-ignore-types.h" />
-    <ClInclude Include="..\SPClient\list-kind-flags.h" />
-    <ClInclude Include="..\SPClient\list-message.h" />
-    <ClInclude Include="..\SPClient\list-mon-message.h" />
-    <ClInclude Include="..\SPClient\list-mon-race-flags.h" />
-    <ClInclude Include="..\SPClient\list-mon-spells.h" />
-    <ClInclude Include="..\SPClient\list-mon-temp-flags.h" />
-    <ClInclude Include="..\SPClient\list-mon-timed.h" />
-    <ClInclude Include="..\SPClient\list-object-flags.h" />
-    <ClInclude Include="..\SPClient\list-object-modifiers.h" />
-    <ClInclude Include="..\SPClient\list-options.h" />
-    <ClInclude Include="..\SPClient\list-origins.h" />
-    <ClInclude Include="..\SPClient\list-parser-errors.h" />
-    <ClInclude Include="..\SPClient\list-player-flags.h" />
-    <ClInclude Include="..\SPClient\list-player-timed.h" />
-    <ClInclude Include="..\SPClient\list-projections.h" />
-    <ClInclude Include="..\SPClient\list-randart-properties.h" />
-    <ClInclude Include="..\SPClient\list-rooms.h" />
-    <ClInclude Include="..\SPClient\list-room-flags.h" />
-    <ClInclude Include="..\SPClient\list-square-flags.h" />
-    <ClInclude Include="..\SPClient\list-stats.h" />
-    <ClInclude Include="..\SPClient\list-terrain-flags.h" />
-    <ClInclude Include="..\SPClient\list-trap-flags.h" />
-    <ClInclude Include="..\SPClient\list-tvals.h" />
-    <ClInclude Include="..\SPClient\list-ui-entry-renderers.h" />
-    <ClInclude Include="..\SPClient\message.h" />
-    <ClInclude Include="..\SPClient\mon-attack.h" />
-    <ClInclude Include="..\SPClient\mon-blows.h" />
-    <ClInclude Include="..\SPClient\mon-desc.h" />
-    <ClInclude Include="..\SPClient\mon-group.h" />
-    <ClInclude Include="..\SPClient\mon-init.h" />
-    <ClInclude Include="..\SPClient\mon-list.h" />
-    <ClInclude Include="..\SPClient\mon-lore.h" />
-    <ClInclude Include="..\SPClient\mon-make.h" />
-    <ClInclude Include="..\SPClient\mon-move.h" />
-    <ClInclude Include="..\SPClient\mon-msg.h" />
-    <ClInclude Include="..\SPClient\mon-predicate.h" />
-    <ClInclude Include="..\SPClient\mon-spell.h" />
-    <ClInclude Include="..\SPClient\mon-summon.h" />
-    <ClInclude Include="..\SPClient\mon-timed.h" />
-    <ClInclude Include="..\SPClient\mon-util.h" />
-    <ClInclude Include="..\SPClient\monster.h" />
-    <ClInclude Include="..\SPClient\obj-chest.h" />
-    <ClInclude Include="..\SPClient\obj-curse.h" />
-    <ClInclude Include="..\SPClient\obj-desc.h" />
-    <ClInclude Include="..\SPClient\obj-gear.h" />
-    <ClInclude Include="..\SPClient\obj-ignore.h" />
-    <ClInclude Include="..\SPClient\obj-info.h" />
-    <ClInclude Include="..\SPClient\obj-init.h" />
-    <ClInclude Include="..\SPClient\obj-knowledge.h" />
-    <ClInclude Include="..\SPClient\obj-list.h" />
-    <ClInclude Include="..\SPClient\obj-make.h" />
-    <ClInclude Include="..\SPClient\obj-pile.h" />
-    <ClInclude Include="..\SPClient\obj-power.h" />
-    <ClInclude Include="..\SPClient\obj-properties.h" />
-    <ClInclude Include="..\SPClient\obj-randart.h" />
-    <ClInclude Include="..\SPClient\obj-slays.h" />
-    <ClInclude Include="..\SPClient\obj-tval.h" />
-    <ClInclude Include="..\SPClient\obj-util.h" />
-    <ClInclude Include="..\SPClient\object.h" />
-    <ClInclude Include="..\SPClient\option.h" />
-    <ClInclude Include="..\SPClient\parser.h" />
-    <ClInclude Include="..\SPClient\player-attack.h" />
-    <ClInclude Include="..\SPClient\player-birth.h" />
-    <ClInclude Include="..\SPClient\player-calcs.h" />
-    <ClInclude Include="..\SPClient\player-history.h" />
-    <ClInclude Include="..\SPClient\player-path.h" />
-    <ClInclude Include="..\SPClient\player-properties.h" />
-    <ClInclude Include="..\SPClient\player-quest.h" />
-    <ClInclude Include="..\SPClient\player-spell.h" />
-    <ClInclude Include="..\SPClient\player-timed.h" />
-    <ClInclude Include="..\SPClient\player-util.h" />
-    <ClInclude Include="..\SPClient\player.h" />
-    <ClInclude Include="..\SPClient\project.h" />
-    <ClInclude Include="..\SPClient\randname.h" />
-    <ClInclude Include="..\SPClient\save-charoutput.h" />
-    <ClInclude Include="..\SPClient\savefile.h" />
-    <ClInclude Include="..\SPClient\score.h" />
-    <ClInclude Include="..\SPClient\snd-sdl.h" />
-    <ClInclude Include="..\SPClient\snd-win.h" />
-    <ClInclude Include="..\SPClient\sound.h" />
-    <ClInclude Include="..\SPClient\source.h" />
-    <ClInclude Include="..\SPClient\store.h" />
-    <ClInclude Include="..\SPClient\target.h" />
-    <ClInclude Include="..\SPClient\trap.h" />
-    <ClInclude Include="..\SPClient\ui-birth.h" />
-    <ClInclude Include="..\SPClient\ui-command.h" />
-    <ClInclude Include="..\SPClient\ui-context.h" />
-    <ClInclude Include="..\SPClient\ui-curse.h" />
-    <ClInclude Include="..\SPClient\ui-death.h" />
-    <ClInclude Include="..\SPClient\ui-display.h" />
-    <ClInclude Include="..\SPClient\ui-effect.h" />
-    <ClInclude Include="..\SPClient\ui-entry-combiner.h" />
-    <ClInclude Include="..\SPClient\ui-entry-init.h" />
-    <ClInclude Include="..\SPClient\ui-entry-renderers.h" />
-    <ClInclude Include="..\SPClient\ui-entry.h" />
-    <ClInclude Include="..\SPClient\ui-equip-cmp.h" />
-    <ClInclude Include="..\SPClient\ui-event.h" />
-    <ClInclude Include="..\SPClient\ui-game.h" />
-    <ClInclude Include="..\SPClient\ui-help.h" />
-    <ClInclude Include="..\SPClient\ui-history.h" />
-    <ClInclude Include="..\SPClient\ui-init.h" />
-    <ClInclude Include="..\SPClient\ui-input.h" />
-    <ClInclude Include="..\SPClient\ui-keymap.h" />
-    <ClInclude Include="..\SPClient\ui-knowledge.h" />
-    <ClInclude Include="..\SPClient\ui-map.h" />
-    <ClInclude Include="..\SPClient\ui-menu.h" />
-    <ClInclude Include="..\SPClient\ui-mon-list.h" />
-    <ClInclude Include="..\SPClient\ui-mon-lore.h" />
-    <ClInclude Include="..\SPClient\ui-obj-list.h" />
-    <ClInclude Include="..\SPClient\ui-object.h" />
-    <ClInclude Include="..\SPClient\ui-options.h" />
-    <ClInclude Include="..\SPClient\ui-output.h" />
-    <ClInclude Include="..\SPClient\ui-player-properties.h" />
-    <ClInclude Include="..\SPClient\ui-player.h" />
-    <ClInclude Include="..\SPClient\ui-prefs.h" />
-    <ClInclude Include="..\SPClient\ui-score.h" />
-    <ClInclude Include="..\SPClient\ui-signals.h" />
-    <ClInclude Include="..\SPClient\ui-spell.h" />
-    <ClInclude Include="..\SPClient\ui-spoil.h" />
-    <ClInclude Include="..\SPClient\ui-store.h" />
-    <ClInclude Include="..\SPClient\ui-target.h" />
-    <ClInclude Include="..\SPClient\ui-term.h" />
-    <ClInclude Include="..\SPClient\ui-visuals.h" />
-    <ClInclude Include="..\SPClient\ui-wizard.h" />
-    <ClInclude Include="..\SPClient\win\IntegratedLibPng\png.h">
-      <!--Was "..\SPClient\win\include\png.h" -->
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\IntegratedLibPng\pngconf.h">
-      <!--Was "..\SPClient\win\include\pngconf.h" -->
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\IntegratedLibPng\pnglibconf.h">
-      <!--Needed for latest png.h -->
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\IntegratedZLib\zconf.h">
-      <!--Was "..\SPClient\win\include\zconf.h" -->
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\IntegratedZLib\zlib.h">
-      <!--Was "..\SPClient\win\include\zlib.h" -->
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\readdib.h">
-    </ClInclude>
-    <ClInclude Include="..\SPClient\win\win-menu.h" />
-    <ClInclude Include="..\SPClient\win\win-term.h" />
-    <ClInclude Include="..\SPClient\wizard.h" />
-    <ClInclude Include="..\SPClient\z-bitflag.h" />
-    <ClInclude Include="..\SPClient\z-color.h" />
-    <ClInclude Include="..\SPClient\z-debug.h" />
-    <ClInclude Include="..\SPClient\z-dice.h" />
-    <ClInclude Include="..\SPClient\z-expression.h" />
-    <ClInclude Include="..\SPClient\z-file.h" />
-    <ClInclude Include="..\SPClient\z-form.h" />
-    <ClInclude Include="..\SPClient\z-quark.h" />
-    <ClInclude Include="..\SPClient\z-queue.h" />
-    <ClInclude Include="..\SPClient\z-rand.h" />
-    <ClInclude Include="..\SPClient\z-set.h" />
-    <ClInclude Include="..\SPClient\z-textblock.h" />
-    <ClInclude Include="..\SPClient\z-type.h" />
-    <ClInclude Include="..\SPClient\z-util.h" />
-    <ClInclude Include="..\SPClient\z-virt.h" />
-  </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="IconsAndTileSets">
     <Image Include="..\..\lib\icons\att-128.png" />
     <Image Include="..\..\lib\icons\att-16.png" />
     <Image Include="..\..\lib\icons\att-256.png" />
@@ -574,10 +155,10 @@ xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\* $(OutDir)lib\ /DESY /exclude
     <Image Include="..\..\lib\tiles\shockbolt\64x64.png" />
     <Image Include="..\SPClient\win\angband.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\SPClient\win\angband.rc" />
+  <ItemGroup Label="ResourceFile">
+
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="FontsAndTiles">
     <None Include="..\..\lib\customize\font-gcu.prf" />
     <None Include="..\..\lib\customize\font-sdl.prf" />
     <None Include="..\..\lib\customize\font-sdl2.prf" />
@@ -630,7 +211,7 @@ xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\* $(OutDir)lib\ /DESY /exclude
     <None Include="..\..\lib\tiles\shockbolt\graf-shb-light.prf" />
     <None Include="..\..\lib\tiles\shockbolt\xtra-shb.prf" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="GameDataStuff">
     <Text Include="..\..\lib\gamedata\activation.txt" />
     <Text Include="..\..\lib\gamedata\artifact.txt" />
     <Text Include="..\..\lib\gamedata\blow_effects.txt" />
@@ -685,7 +266,7 @@ xcopy $(RootDirectory)\IntegratedDLLs\$(Platform)\* $(OutDir)lib\ /DESY /exclude
     <Text Include="..\..\lib\screens\news.txt" />
     <Text Include="..\..\lib\tiles\list.txt" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="Sounds">
     <Media Include="..\..\lib\sounds\amb_bell_metal1.mp3" />
     <Media Include="..\..\lib\sounds\amb_bell_metal2.mp3" />
     <Media Include="..\..\lib\sounds\amb_bell_tibet1.mp3" />
