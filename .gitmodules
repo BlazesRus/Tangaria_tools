@@ -4,3 +4,4 @@
 [submodule "Release_x64"]
 	path = Release_x64
 	url = https://github.com/BlazesRus/Tangaria_release.git
+	branch = CoOp
