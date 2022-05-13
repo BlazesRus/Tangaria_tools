@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{1304C40B-728A-448C-8EBF-3A8C562B8CAC}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <RootNamespace>Mangband</RootNamespace>
+    <ProjectName>mangclient_sdl</ProjectName>
+    <PlatformToolset>v142</PlatformToolset>
+    <!-- 142 for VS2019(Default);143 for VS2022-->
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16' Or '$(VisualStudioVersion)' == ''">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="GlobalsPart2">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <!--
+  Converting Relative to Absolute Path based on https://stackoverflow.com/questions/176931/how-can-i-get-msbuild-to-evaluate-and-print-the-full-path-when-given-a-relative
+  $([System.IO.Path]::GetFullPath('XXX'))
+  -->
+  <!--Assuming Project Files is SubFolder of Main Project Root-->
+  <PropertyGroup Label="UserMacros">
+    <ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\'))</ParentOfRoot>
+    <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</RootDirectory>
+    <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
+    <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
+    <LibSrcDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibSrcDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ZLibLocType>Integrated</ZLibLocType>
+    <ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedZLib\'))</ZLibDir>
+    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\zlib.lib'))</ZLibLibrary>
+    <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
+  </PropertyGroup>
+  <PropertyGroup>
+    <LibPngLocType>Integrated</LibPngLocType>
+    <LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedLibPng\'))</LibPngDir>
+    <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\libpng.lib'))</LibPngLibrary>
+    <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!--     <SDLLocType>Integrated</SDLLocType> -->
+    <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
+    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL.lib'))</SDLLibrary>
+    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_image.lib'))</SDLImageLibrary>
+    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
+    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
+    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
+    <!--<SDLDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\SDL.dll'))</SDLDLL>-->
+  </PropertyGroup>
+  <!-- Use either SDL 1.X or SDL 2.X files-->
+  <!-- SDL 2.X Properties here
+  <PropertyGroup>
+    <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
+    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2.lib'))</LibPngLibrary>
+    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
+    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
+    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
+    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
+  </PropertyGroup>
+ -->
+  <PropertyGroup Condition="'$(Platform)'=='Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(ZLibDir);$(LibPngDir);$(SDLDir)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)..\lib\um\x86;</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;;$(WinIncludeRoot);$(ZLibDir);$(LibPngDir);$(SDLDir)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)..\lib\um\x64;</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Label="OutputInfo">
+    <OutDir>..\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>..\ObjectFiles\$(Configuration)_$(Platform)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <LinkIncremental>true</LinkIncremental>
+    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
+      <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(LibPngLocType)'=='Integrated'">UsingIntegratedLibPNG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ZLibLocType)'=='Integrated'">UsingIntegratedZLib;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding Condition="'$(Configuration)'=='Release'">true</EnableCOMDATFolding>
+      <OptimizeReferences Condition="'$(Configuration)'=='Release'">true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">$(ZLibLibrary);$(LibPngLibrary);msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)'=='Release'">$(ZLibLibrary);$(LibPngLibrary);msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup Label="IconsAndTileSets">
+    <ClInclude Include="..\common\angband.h" />
+    <ClInclude Include="..\common\bit.h" />
+    <ClInclude Include="..\common\buildid.h" />
+    <ClInclude Include="..\common\config.h" />
+    <ClInclude Include="..\common\datafile.h" />
+    <ClInclude Include="..\common\display.h" />
+    <ClInclude Include="..\common\guid.h" />
+    <ClInclude Include="..\common\h-basic.h" />
+    <ClInclude Include="..\common\h-net.h" />
+    <ClInclude Include="..\common\h-quark.h" />
+    <ClInclude Include="..\common\list-elements.h" />
+    <ClInclude Include="..\common\list-equip-slots.h" />
+    <ClInclude Include="..\common\list-history-types.h" />
+    <ClInclude Include="..\common\list-ignore-types.h" />
+    <ClInclude Include="..\common\list-kind-flags.h" />
+    <ClInclude Include="..\common\list-message.h" />
+    <ClInclude Include="..\common\list-mon-message.h" />
+    <ClInclude Include="..\common\list-mon-race-flags.h" />
+    <ClInclude Include="..\common\list-mon-spells.h" />
+    <ClInclude Include="..\common\list-mon-temp-flags.h" />
+    <ClInclude Include="..\common\list-mon-timed.h" />
+    <ClInclude Include="..\common\list-object-flags.h" />
+    <ClInclude Include="..\common\list-object-modifiers.h" />
+    <ClInclude Include="..\common\list-options.h" />
+    <ClInclude Include="..\common\list-packets.h" />
+    <ClInclude Include="..\common\list-parser-errors.h" />
+    <ClInclude Include="..\common\list-player-flags.h" />
+    <ClInclude Include="..\common\list-player-timed.h" />
+    <ClInclude Include="..\common\list-projections.h" />
+    <ClInclude Include="..\common\list-square-flags.h" />
+    <ClInclude Include="..\common\list-stats.h" />
+    <ClInclude Include="..\common\list-trap-flags.h" />
+    <ClInclude Include="..\common\list-tvals.h" />
+    <ClInclude Include="..\common\md5.h" />
+    <ClInclude Include="..\common\mon-common.h" />
+    <ClInclude Include="..\common\net-unix.h" />
+    <ClInclude Include="..\common\net-win.h" />
+    <ClInclude Include="..\common\obj-common.h" />
+    <ClInclude Include="..\common\obj-gear-common.h" />
+    <ClInclude Include="..\common\obj-tval.h" />
+    <ClInclude Include="..\common\option.h" />
+    <ClInclude Include="..\common\pack.h" />
+    <ClInclude Include="..\common\parser.h" />
+    <ClInclude Include="..\common\player-common-calcs.h" />
+    <ClInclude Include="..\common\player-common.h" />
+    <ClInclude Include="..\common\player-state.h" />
+    <ClInclude Include="..\common\randname.h" />
+    <ClInclude Include="..\common\sockbuf.h" />
+    <ClInclude Include="..\common\source.h" />
+    <ClInclude Include="..\common\store-types.h" />
+    <ClInclude Include="..\common\trap-common.h" />
+    <ClInclude Include="..\common\util.h" />
+    <ClInclude Include="..\common\version.h" />
+    <ClInclude Include="..\common\z-bitflag.h" />
+    <ClInclude Include="..\common\z-color.h" />
+    <ClInclude Include="..\common\z-defines.h" />
+    <ClInclude Include="..\common\z-dice.h" />
+    <ClInclude Include="..\common\z-expression.h" />
+    <ClInclude Include="..\common\z-file.h" />
+    <ClInclude Include="..\common\z-form.h" />
+    <ClInclude Include="..\common\z-msg.h" />
+    <ClInclude Include="..\common\z-rand.h" />
+    <ClInclude Include="..\common\z-set.h" />
+    <ClInclude Include="..\common\z-spells.h" />
+    <ClInclude Include="..\common\z-type.h" />
+    <ClInclude Include="..\common\z-util.h" />
+    <ClInclude Include="..\common\z-virt.h" />
+  </ItemGroup>
+  <ItemGroup Label="ResourceFile">
+    <ClCompile Include="..\common\buildid.c" />
+    <ClCompile Include="..\common\datafile.c" />
+    <ClCompile Include="..\common\display.c" />
+    <ClCompile Include="..\common\guid.c" />
+    <ClCompile Include="..\common\md5.c" />
+    <ClCompile Include="..\common\net-unix.c" />
+    <ClCompile Include="..\common\net-win.c" />
+    <ClCompile Include="..\common\obj-gear-common.c" />
+    <ClCompile Include="..\common\obj-tval.c" />
+    <ClCompile Include="..\common\option.c" />
+    <ClCompile Include="..\common\parser.c" />
+    <ClCompile Include="..\common\randname.c" />
+    <ClCompile Include="..\common\sockbuf.c" />
+    <ClCompile Include="..\common\source.c" />
+    <ClCompile Include="..\common\util.c" />
+    <ClCompile Include="..\common\z-bitflag.c" />
+    <ClCompile Include="..\common\z-color.c" />
+    <ClCompile Include="..\common\z-dice.c" />
+    <ClCompile Include="..\common\z-expression.c" />
+    <ClCompile Include="..\common\z-file.c" />
+    <ClCompile Include="..\common\z-form.c" />
+    <ClCompile Include="..\common\z-rand.c" />
+    <ClCompile Include="..\common\z-set.c" />
+    <ClCompile Include="..\common\z-type.c" />
+    <ClCompile Include="..\common\z-util.c" />
+    <ClCompile Include="..\common\z-virt.c" />
+  </ItemGroup>
+  <ItemGroup Label="FontsAndTiles">
+  </ItemGroup>
+  <ItemGroup Label="GameDataStuff">
+    <Text Include="..\..\lib\gamedata\activation.txt" />
+    <Text Include="..\..\lib\gamedata\artifact.txt" />
+    <Text Include="..\..\lib\gamedata\blow_effects.txt" />
+    <Text Include="..\..\lib\gamedata\blow_methods.txt" />
+    <Text Include="..\..\lib\gamedata\body.txt" />
+    <Text Include="..\..\lib\gamedata\brand.txt" />
+    <Text Include="..\..\lib\gamedata\chest_trap.txt" />
+    <Text Include="..\..\lib\gamedata\class.txt" />
+    <Text Include="..\..\lib\gamedata\constants.txt" />
+    <Text Include="..\..\lib\gamedata\curse.txt" />
+    <Text Include="..\..\lib\gamedata\dungeon_profile.txt" />
+    <Text Include="..\..\lib\gamedata\ego_item.txt" />
+    <Text Include="..\..\lib\gamedata\flavor.txt" />
+    <Text Include="..\..\lib\gamedata\hints.txt" />
+    <Text Include="..\..\lib\gamedata\history.txt" />
+    <Text Include="..\..\lib\gamedata\monster.txt" />
+    <Text Include="..\..\lib\gamedata\monster_base.txt" />
+    <Text Include="..\..\lib\gamedata\monster_spell.txt" />
+    <Text Include="..\..\lib\gamedata\names.txt" />
+    <Text Include="..\..\lib\gamedata\object.txt" />
+    <Text Include="..\..\lib\gamedata\object_base.txt" />
+    <Text Include="..\..\lib\gamedata\object_property.txt" />
+    <Text Include="..\..\lib\gamedata\pain.txt" />
+    <Text Include="..\..\lib\gamedata\pit.txt" />
+    <Text Include="..\..\lib\gamedata\player_property.txt" />
+    <Text Include="..\..\lib\gamedata\player_timed.txt" />
+    <Text Include="..\..\lib\gamedata\projection.txt" />
+    <Text Include="..\..\lib\gamedata\p_race.txt" />
+    <Text Include="..\..\lib\gamedata\quest.txt" />
+    <Text Include="..\..\lib\gamedata\realm.txt" />
+    <Text Include="..\..\lib\gamedata\room_template.txt" />
+    <Text Include="..\..\lib\gamedata\shape.txt" />
+    <Text Include="..\..\lib\gamedata\slay.txt" />
+    <Text Include="..\..\lib\gamedata\store.txt" />
+    <Text Include="..\..\lib\gamedata\summon.txt" />
+    <Text Include="..\..\lib\gamedata\terrain.txt" />
+    <Text Include="..\..\lib\gamedata\trap.txt" />
+    <Text Include="..\..\lib\gamedata\ui_entry.txt" />
+    <Text Include="..\..\lib\gamedata\ui_entry_base.txt" />
+    <Text Include="..\..\lib\gamedata\ui_entry_renderer.txt" />
+    <Text Include="..\..\lib\gamedata\vault.txt" />
+    <Text Include="..\..\lib\gamedata\visuals.txt" />
+    <Text Include="..\..\lib\gamedata\world.txt" />
+    <Text Include="..\..\lib\help\commands.txt" />
+    <Text Include="..\..\lib\help\index.txt" />
+    <Text Include="..\..\lib\help\r_comm.txt" />
+    <Text Include="..\..\lib\help\r_index.txt" />
+    <Text Include="..\..\lib\help\symbols.txt" />
+    <Text Include="..\..\lib\screens\crown.txt" />
+    <Text Include="..\..\lib\screens\dead.txt" />
+    <Text Include="..\..\lib\screens\news.txt" />
+    <Text Include="..\..\lib\tiles\list.txt" />
+  </ItemGroup>
+  <ItemGroup Label="Sounds">
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
