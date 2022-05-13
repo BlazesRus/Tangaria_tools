@@ -1,3 +1,6 @@
 [submodule "TiledToAngbandExport"]
 	path = TiledToAngbandExport
 	url = https://github.com/ilius33/TiledToAngbandExport
+[submodule "Release_x64"]
+	path = Release_x64
+	url = https://github.com/BlazesRus/Tangaria_release.git
