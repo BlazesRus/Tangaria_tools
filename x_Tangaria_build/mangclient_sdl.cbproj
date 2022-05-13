@@ -41,7 +41,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-        <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
+        <IntermediateOutputDir>.\ObjectFiles\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
@@ -92,9 +92,9 @@
         <Manifest_File>(None)</Manifest_File>
         <BCC_Defines>STRICT;BCC_IDE;WINDOWS;SOUND_SDL;USE_SDL;$(BCC_Defines)</BCC_Defines>
         <BCC_IncludePath>D:\GitHub\Tangaria\PWMAngband\src\win;D:\GitHub\Tangaria\PWMAngband\src\common;D:\GitHub\Tangaria\PWMAngband\src\client;$(BCC_IncludePath)</BCC_IncludePath>
-        <BCC_OutputDir>D:\GitHub\Tangaria\PWMAngband\</BCC_OutputDir>
         <BCC_PCHCache>true</BCC_PCHCache>
         <ILINK_LibraryPath>D:\GitHub\Tangaria\PWMAngband\src\_SDL;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <BCC_OutputDir>D:\GitHub\Tangaria\PWMAngband\</BCC_OutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
