@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-  <Transactions>
-    <Transaction>2022/05/03 20:15:58.705,C:\UserFiles\Github\TangariaFiles\TangariaCoopBranch\src\bcb6\Tangaria.groupproj=C:\UserFiles\Github\TangariaFiles\TangariaCoopBranch\src\bcb6\ProjectGroup1.groupproj</Transaction>
-  </Transactions>
-  <Default.Personality>
-    <Projects ActiveProject="C:\UserFiles\Github\TangariaFiles\TangariaCoopBranch\src\bcb6\mangclient_sdl.cbproj"/>
-  </Default.Personality>
-</BorlandProject>

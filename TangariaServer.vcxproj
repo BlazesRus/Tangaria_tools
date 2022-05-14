@@ -64,7 +64,7 @@
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
-    <LibSrcDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibSrcDir>
+    <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
   </PropertyGroup>
   <PropertyGroup>
     <ZLibLocType>Integrated</ZLibLocType>
