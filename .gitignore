@@ -4,3 +4,19 @@
 *.db
 
 .vs/Angband/v16/Preview/
+
+.vs/Tangeria/v16/.suo
+
+*.db-shm
+
+.vs/Tangeria/v16/Preview/Browse.VC.db-wal
+
+*.opendb
+
+.vs/Tangeria/v16/Preview/ipch/AutoPCH/115754eea0f24c6e/
+
+.vs/Tangeria/v16/Preview/ipch/AutoPCH/6686cbf70ca830f4/
+
+.vs/Tangeria/v16/Preview/ipch/AutoPCH/e8a1574f9d688c97/
+
+.vs/Tangeria/v16/Preview/ipch/AutoPCH/ec8da88166580d97/
