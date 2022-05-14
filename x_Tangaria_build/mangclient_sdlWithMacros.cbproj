@@ -41,37 +41,21 @@
     </PropertyGroup>
 	<!--Assuming ProjectFiles/TangeriaTools is SubModule of Main Project Root-->
 	<PropertyGroup Label="UserMacros">
-		<ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\..\'))</ParentOfRoot>
-		<RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\'))</RootDirectory>
-		<SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
-		<WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
-		<LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
+		<RootDirectory>$([System.IO.Path]::GetFullPath('\..\..\'))</RootDirectory>
+		<SourceRoot>$([System.IO.Path]::GetFullPath('$\..\..\src\'))</SourceRoot>
+		<WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)win\'))</WinIncludeRoot>
+		<LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)lib\'))</LibDataDir>
 		<ObjectFilesDir>$([System.IO.Path]::GetFullPath('.\ObjectFiles\$(Platform)\$(Config)'))</ObjectFilesDir>
-		<ClientSrcDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)\client\'))</ClientSrcDir>
-		<CommonSrcDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)\common\'))</CommonSrcDir>
+		<ClientSrcDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)client\'))</ClientSrcDir>
+		<CommonSrcDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)common\'))</CommonSrcDir>
 		<BCCOutputDir>$([System.IO.Path]::GetFullPath('.\BCCFiles\'))</BCCOutputDir>
 		<BinaryOutputDir>$([System.IO.Path]::GetFullPath('.\$(Platform)\$(Config)'))</BinaryOutputDir>
 		<SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
-		<SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL.lib'))</SDLLibrary>
-		<SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_image.lib'))</SDLImageLibrary>
-		<SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
-		<SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
-		<FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
-		<!--Altered "Integrated Library" paths for the updated altered file locations
-		<!--<ZLibLocType>Integrated</ZLibLocType>-->
-		<ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedZLib\'))</ZLibDir>
-		<ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\zlib.lib'))</ZLibLibrary>
-		<ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
-		<ZLibIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</ZLibIncludeRoot>
-		<!--<LibPngLocType>Integrated</LibPngLocType>-->
-		<LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)IntegratedLibPng\'))</LibPngDir>
-		<LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\libpng.lib'))</LibPngLibrary>
-		<LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
 	</PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <IntermediateOutputDir>$(ObjectFilesDir)</IntermediateOutputDir>
-        <FinalOutputDir>$(BinaryOutputDir)</FinalOutputDir>
+        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
         <BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -80,7 +64,7 @@
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <IncludePath>$(WinIncludeRoot);$(CommonSrcDir);$(ClientSrcDir);$(IncludePath)</IncludePath>
         <_TCHARMapping>char</_TCHARMapping>
-        <ILINK_LibraryPath>$(WinIncludeRoot);$(CommonSrcDir);$(ClientSrcDir);$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(WinIncludeRoot)\$(PLATFORM);$(WinIncludeRoot);$(CommonSrcDir);$(ClientSrcDir);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>mangclient_sdl</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -91,7 +75,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <UWP_CppLogo44>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_44.png</UWP_CppLogo44>
         <UWP_CppLogo150>$(BDS)\bin\Artwork\Windows\UWP\cppreg_UwpDefault_150.png</UWP_CppLogo150>
-        <ILINK_LibraryPath>$(SDLDir)\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>$(SDLDir);$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -116,7 +100,7 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <FinalOutputDir>$(BinaryOutputDir)</FinalOutputDir>
+        <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
         <BCC_Defines>STRICT;BCC_IDE;WINDOWS;SOUND_SDL;USE_SDL;$(BCC_Defines)</BCC_Defines>
@@ -446,7 +430,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BinaryOutputDir)mangclient_sdl.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName=".\$(Platform)\$(Config)mangclient_sdl.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>mangclient_sdl.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -524,7 +508,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BinaryOutputDir)mangclient_sdl.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName=".\$(Platform)\$(Config)mangclient_sdl.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>mangclient_sdl.tds</RemoteName>
                         <Overwrite>true</Overwrite>

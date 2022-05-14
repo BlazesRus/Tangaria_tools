@@ -24,3 +24,13 @@ TangeriaSDLClientFiles.xml
 .vs/Tangeria/v16/Preview/ipch/AutoPCH/e8a1574f9d688c97/
 
 .vs/Tangeria/v16/Preview/ipch/AutoPCH/ec8da88166580d97/
+
+x_Tangaria_build/mangbandOld.cbproj
+
+x_Tangaria_build/mangbandOld.res
+
+mangband (2).cbproj
+
+*.tds
+
+*.obj
