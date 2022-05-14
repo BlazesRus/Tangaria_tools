@@ -44,19 +44,9 @@
         <Cfg_2>true</Cfg_2>
         <Base>true</Base>
     </PropertyGroup>
-	<!--Assuming ProjectFiles/TangeriaTools is SubFolder of Main Project Root-->
-	<PropertyGroup Label="UserMacros">
-		<ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\..\'))</ParentOfRoot>
-		<RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</RootDirectory>
-		<SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
-		<WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
-		<LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
-		<ObjectFilesDir>$([System.IO.Path]::GetFullPath('.\ObjectFiles\$(Platform)\$(Config)'))</LibDataDir>
-		<BCCOutputDir>$([System.IO.Path]::GetFullPath('.\BCCFiles\'))</LibDataDir>
-	</PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
-        <IntermediateOutputDir>.\ObjectFiles\$(Platform)\$(Config)</IntermediateOutputDir>
+        <IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
         <FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
         <BCC_wpar>false</BCC_wpar>
         <BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
@@ -64,9 +54,9 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>$(WinIncludeRoot);PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\Tangaria\PWMAngband\src\server\;$(IncludePath)</IncludePath>
+        <IncludePath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\Tangaria\PWMAngband\src\server\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
-        <ILINK_LibraryPath>$(WinIncludeRoot);PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\Tangaria\PWMAngband\src\server\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\Tangaria\PWMAngband\src\server\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>mangband</SanitizedProjectName>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
@@ -531,7 +521,7 @@
         <CppCompile Include="PWMAngband\src\server\z-textblock.c">
             <BuildOrder>128</BuildOrder>
         </CppCompile>
-        <ResourceCompile Include="$(WinIncludeRoot)angband.rc">
+        <ResourceCompile Include="PWMAngband\src\win\angband.rc">
             <Form>angband.res</Form>
             <BuildOrder>129</BuildOrder>
         </ResourceCompile>

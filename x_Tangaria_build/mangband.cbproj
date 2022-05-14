@@ -4,7 +4,7 @@
         <ProjectVersion>19.2</ProjectVersion>
         <FrameworkType>None</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Console</AppType>
@@ -1228,7 +1228,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="PWMAngband\mangband.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="$(BinaryOutputDir)mangband.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>mangband.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -1312,7 +1312,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="PWMAngband\mangband.tds" Configuration="Debug" Class="DebugSymbols">
+                <DeployFile LocalName="$(BinaryOutputDir)mangband.tds" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
                         <RemoteName>mangband.tds</RemoteName>
                         <Overwrite>true</Overwrite>
