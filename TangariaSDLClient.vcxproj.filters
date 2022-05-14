@@ -52,6 +52,9 @@
     <Filter Include="Resource Files\screens">
       <UniqueIdentifier>{8a54c5c2-3c10-4cf2-b6a8-9588ab62a502}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SDL">
+      <UniqueIdentifier>{b90ce1d6-6cab-46ed-9a41-f38278fcbeb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\win\png.h">
@@ -383,6 +386,99 @@
     </ClInclude>
     <ClInclude Include="..\src\client\c-angband.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\begin_code.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\close_code.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_active.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_audio.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_cdrom.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_config.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_config_win32.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_cpuinfo.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_endian.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_error.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_events.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_image.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_joystick.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_keyboard.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_keysym.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_loadso.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_main.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_mixer.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_mouse.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_mutex.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_platform.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_quit.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_rwops.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_stdinc.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_thread.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_timer.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_ttf.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_types.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_version.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\_SDL\SDL_video.h">
+      <Filter>SDL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1772,9 +1868,6 @@
     <ClCompile Include="..\src\win\scrnshot.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\win\win-layout.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\common\buildid.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1940,13 +2033,7 @@
     <ClCompile Include="..\src\client\main-win.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\client\main-sdl2.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\client\main-sdl.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\client\main-gcu.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\client\main.c">

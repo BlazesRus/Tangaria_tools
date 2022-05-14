@@ -68,14 +68,14 @@
   <PropertyGroup>
     <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</ZLibDir> -->
     <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\zlib.lib'))</ZLibLibrary>
-    <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\zlib.lib'))</ZLibLibrary>
+    <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
   <PropertyGroup>
     <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
     <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\libpng.lib'))</LibPngLibrary>
-    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\libpng.lib'))</LibPngLibrary>
+    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
   <PropertyGroup>

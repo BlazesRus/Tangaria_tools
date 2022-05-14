@@ -40,3 +40,7 @@ mangband (2).cbproj
 x_Tangaria_build/ObjectFiles/Win64/Release/
 
 x_Tangaria_build/Win64/Release/
+
+x_Tangaria_build/__history/
+
+*.local

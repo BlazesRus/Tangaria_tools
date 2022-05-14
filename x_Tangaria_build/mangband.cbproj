@@ -9,16 +9,6 @@
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Console</AppType>
     </PropertyGroup>
-    <PropertyGroup Label="UserMacros">
-        <RootDirectory>$([System.IO.Path]::GetFullPath(&apos;..\..\&apos;))</RootDirectory>
-        <SourceRoot>$([System.IO.Path]::GetFullPath(&apos;..\..\src\&apos;))</SourceRoot>
-        <WinIncludeRoot>$([System.IO.Path]::GetFullPath(&apos;..\..\src\win\&apos;))</WinIncludeRoot>
-        <ObjectFilesDir>$([System.IO.Path]::GetFullPath(&apos;.\ObjectFiles\$(Platform)\$(Config)&apos;))</ObjectFilesDir>
-        <ServerSrcDir>$([System.IO.Path]::GetFullPath(&apos;..\..\src\server\&apos;))</ServerSrcDir>
-        <CommonSrcDir>$([System.IO.Path]::GetFullPath(&apos;..\..\src\common\&apos;))</CommonSrcDir>
-        <BCCOutputDir>$([System.IO.Path]::GetFullPath(&apos;.\BCCFiles\&apos;))</BCCOutputDir>
-        <BinaryOutputDir>$([System.IO.Path]::GetFullPath(&apos;.\$(Platform)\$(Config)&apos;))</BinaryOutputDir>
-    </PropertyGroup>
     <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
         <Base>true</Base>
     </PropertyGroup>

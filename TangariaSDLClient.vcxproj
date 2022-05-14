@@ -68,14 +68,14 @@
   <PropertyGroup>
     <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</ZLibDir> -->
     <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\zlib.lib'))</ZLibLibrary>
-    <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\zlib.lib'))</ZLibLibrary>
+    <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
   <PropertyGroup>
     <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
     <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\$(Platform)\libpng.lib'))</LibPngLibrary>
-    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)lib\libpng.lib'))</LibPngLibrary>
+    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
   <PropertyGroup>
@@ -127,8 +127,8 @@
       <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;SOUND_SDL;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;SOUND_SDL;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdc11</LanguageStandard_C>
       <LanguageStandard_C Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdc11</LanguageStandard_C>
@@ -189,6 +189,37 @@
     <ClCompile Include="..\src\win\readpng.c">
     </ClCompile>
     <ClCompile Include="..\src\win\scrnshot.c" />
+    <ClInclude Include="..\src\_SDL\begin_code.h" />
+    <ClInclude Include="..\src\_SDL\close_code.h" />
+    <ClInclude Include="..\src\_SDL\SDL.h" />
+    <ClInclude Include="..\src\_SDL\SDL_active.h" />
+    <ClInclude Include="..\src\_SDL\SDL_audio.h" />
+    <ClInclude Include="..\src\_SDL\SDL_cdrom.h" />
+    <ClInclude Include="..\src\_SDL\SDL_config.h" />
+    <ClInclude Include="..\src\_SDL\SDL_config_win32.h" />
+    <ClInclude Include="..\src\_SDL\SDL_cpuinfo.h" />
+    <ClInclude Include="..\src\_SDL\SDL_endian.h" />
+    <ClInclude Include="..\src\_SDL\SDL_error.h" />
+    <ClInclude Include="..\src\_SDL\SDL_events.h" />
+    <ClInclude Include="..\src\_SDL\SDL_image.h" />
+    <ClInclude Include="..\src\_SDL\SDL_joystick.h" />
+    <ClInclude Include="..\src\_SDL\SDL_keyboard.h" />
+    <ClInclude Include="..\src\_SDL\SDL_keysym.h" />
+    <ClInclude Include="..\src\_SDL\SDL_loadso.h" />
+    <ClInclude Include="..\src\_SDL\SDL_main.h" />
+    <ClInclude Include="..\src\_SDL\SDL_mixer.h" />
+    <ClInclude Include="..\src\_SDL\SDL_mouse.h" />
+    <ClInclude Include="..\src\_SDL\SDL_mutex.h" />
+    <ClInclude Include="..\src\_SDL\SDL_platform.h" />
+    <ClInclude Include="..\src\_SDL\SDL_quit.h" />
+    <ClInclude Include="..\src\_SDL\SDL_rwops.h" />
+    <ClInclude Include="..\src\_SDL\SDL_stdinc.h" />
+    <ClInclude Include="..\src\_SDL\SDL_thread.h" />
+    <ClInclude Include="..\src\_SDL\SDL_timer.h" />
+    <ClInclude Include="..\src\_SDL\SDL_ttf.h" />
+    <ClInclude Include="..\src\_SDL\SDL_types.h" />
+    <ClInclude Include="..\src\_SDL\SDL_version.h" />
+    <ClInclude Include="..\src\_SDL\SDL_video.h" />
   </ItemGroup>
   <ItemGroup Label="CommonHeaders">
     <ClInclude Include="..\src\common\angband.h" />
@@ -336,9 +367,7 @@
     <ClCompile Include="..\src\client\game-event.c" />
     <ClCompile Include="..\src\client\game-input.c" />
     <ClCompile Include="..\src\client\grafmode.c" />
-    <ClCompile Include="..\src\client\main-gcu.c" />
     <ClCompile Include="..\src\client\main-sdl.c" />
-    <ClCompile Include="..\src\client\main-sdl2.c" />
     <ClCompile Include="..\src\client\main-win.c" />
     <ClCompile Include="..\src\client\main.c" />
     <ClCompile Include="..\src\client\netclient.c" />
@@ -381,10 +410,10 @@
     <Image Include="..\lib\tiles\nomad\8x16.png" />
     <Image Include="..\lib\tiles\old\8x8.png" />
     <Image Include="..\lib\tiles\shockbolt\64x64.png" />
-    <Image Include="..\src\win\angband.ico" />
+    <Image Include="..\src\win\angbandVS.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\src\win\angband.rc" />
+    <ResourceCompile Include="..\src\win\angbandVS.rc" />
   </ItemGroup>
   <ItemGroup Label="GameDataStuff">
     <Text Include="..\lib\gamedata\activation.txt" />
