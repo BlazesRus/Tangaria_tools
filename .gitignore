@@ -34,3 +34,9 @@ mangband (2).cbproj
 *.tds
 
 *.obj
+
+*.ipch
+
+x_Tangaria_build/ObjectFiles/Win64/Release/
+
+x_Tangaria_build/Win64/Release/
