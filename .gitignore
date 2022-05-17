@@ -44,3 +44,13 @@ x_Tangaria_build/Win64/Release/
 x_Tangaria_build/__history/
 
 *.local
+
+*.db-wal
+
+ObjectFiles/mangclient_sdl/Release_Win32/mangclient_sdl.Build.CppClean.log
+
+*.tlog
+
+*.log
+
+ObjectFiles/mangclient_sdl/Release_Win32/

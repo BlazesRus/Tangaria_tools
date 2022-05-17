@@ -66,8 +66,8 @@
     <LibSrcDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibSrcDir>
   </PropertyGroup>
   <PropertyGroup>
-    <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</ZLibDir> -->
-    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
+    <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\zlib-win64\'))</ZLibDir>
+    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
     <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
@@ -78,15 +78,16 @@
     <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
-  <!-- Using SDL 2.X files (including SDL_Net later)-->
+  <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
   <PropertyGroup>
-    <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
-    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2.lib'))</SDLLibrary>
-    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
-    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
-    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
-    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\freetype.lib'))</FreeTypeLibrary>
-    <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)lib\$(Platform)\SDL_net.lib'))</SDLNetLibrary>
+    <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL'))</SDLDir>
+    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL2Output\'))</SDLOutputDir>
+    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
+    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
+    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
+    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
+    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
+    <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL_net.lib'))</SDLNetLibrary>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(SDLDir)</IncludePath>
@@ -101,8 +102,8 @@
     <IncludePath Condition="'$(LibPngDir)'!=''">$(LibPngDir);%(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir>..\$(Configuration)_$(Platform)\</OutDir>
-    <IntDir>..\ObjectFiles\$(Configuration)_$(Platform)\</IntDir>
+    <OutDir>.\$(Configuration)_$(Platform)\</OutDir>
+    <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
@@ -111,12 +112,14 @@
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <!--_WINSOCK_DEPRECATED_NO_WARNINGS Temporary until replace with SDL_Net or newer non-DEPRECATED code-->
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck><!--Replace Winsock code with SDL_net code later-->
+      <SDLCheck>true</SDLCheck>
+      <!--Replace Winsock code with SDL_net code later-->
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;SOUND_SDL2;USE_SDL2;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;SOUND_SDL2;USE_SDL2;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -169,6 +172,7 @@
 -->
     <ClInclude Include="..\src\win\readdib.h">
     </ClInclude>
+    <ClInclude Include="..\src\win\resource.h" />
     <ClInclude Include="..\src\win\win-menu.h" />
     <ClInclude Include="..\src\win\win-term.h" />
     <ClCompile Include="..\src\win\readdib.c">
@@ -176,37 +180,37 @@
     <ClCompile Include="..\src\win\readpng.c">
     </ClCompile>
     <ClCompile Include="..\src\win\scrnshot.c" />
-    <ClInclude Include="..\src\_SDL\begin_code.h" />
-    <ClInclude Include="..\src\_SDL\close_code.h" />
-    <ClInclude Include="..\src\_SDL\SDL.h" />
-    <ClInclude Include="..\src\_SDL\SDL_active.h" />
-    <ClInclude Include="..\src\_SDL\SDL_audio.h" />
-    <ClInclude Include="..\src\_SDL\SDL_cdrom.h" />
-    <ClInclude Include="..\src\_SDL\SDL_config.h" />
-    <ClInclude Include="..\src\_SDL\SDL_config_win32.h" />
-    <ClInclude Include="..\src\_SDL\SDL_cpuinfo.h" />
-    <ClInclude Include="..\src\_SDL\SDL_endian.h" />
-    <ClInclude Include="..\src\_SDL\SDL_error.h" />
-    <ClInclude Include="..\src\_SDL\SDL_events.h" />
-    <ClInclude Include="..\src\_SDL\SDL_image.h" />
-    <ClInclude Include="..\src\_SDL\SDL_joystick.h" />
-    <ClInclude Include="..\src\_SDL\SDL_keyboard.h" />
-    <ClInclude Include="..\src\_SDL\SDL_keysym.h" />
-    <ClInclude Include="..\src\_SDL\SDL_loadso.h" />
-    <ClInclude Include="..\src\_SDL\SDL_main.h" />
-    <ClInclude Include="..\src\_SDL\SDL_mixer.h" />
-    <ClInclude Include="..\src\_SDL\SDL_mouse.h" />
-    <ClInclude Include="..\src\_SDL\SDL_mutex.h" />
-    <ClInclude Include="..\src\_SDL\SDL_platform.h" />
-    <ClInclude Include="..\src\_SDL\SDL_quit.h" />
-    <ClInclude Include="..\src\_SDL\SDL_rwops.h" />
-    <ClInclude Include="..\src\_SDL\SDL_stdinc.h" />
-    <ClInclude Include="..\src\_SDL\SDL_thread.h" />
-    <ClInclude Include="..\src\_SDL\SDL_timer.h" />
-    <ClInclude Include="..\src\_SDL\SDL_ttf.h" />
-    <ClInclude Include="..\src\_SDL\SDL_types.h" />
-    <ClInclude Include="..\src\_SDL\SDL_version.h" />
-    <ClInclude Include="..\src\_SDL\SDL_video.h" />
+    <ClInclude Include="$(SDLDir)\begin_code.h" />
+    <ClInclude Include="$(SDLDir)\close_code.h" />
+    <ClInclude Include="$(SDLDir)\SDL.h" />
+    <ClInclude Include="$(SDLDir)\SDL_active.h" />
+    <ClInclude Include="$(SDLDir)\SDL_audio.h" />
+    <ClInclude Include="$(SDLDir)\SDL_cdrom.h" />
+    <ClInclude Include="$(SDLDir)\SDL_config.h" />
+    <ClInclude Include="$(SDLDir)\SDL_config_win32.h" />
+    <ClInclude Include="$(SDLDir)\SDL_cpuinfo.h" />
+    <ClInclude Include="$(SDLDir)\SDL_endian.h" />
+    <ClInclude Include="$(SDLDir)\SDL_error.h" />
+    <ClInclude Include="$(SDLDir)\SDL_events.h" />
+    <ClInclude Include="$(SDLDir)\SDL_image.h" />
+    <ClInclude Include="$(SDLDir)\SDL_joystick.h" />
+    <ClInclude Include="$(SDLDir)\SDL_keyboard.h" />
+    <ClInclude Include="$(SDLDir)\SDL_keysym.h" />
+    <ClInclude Include="$(SDLDir)\SDL_loadso.h" />
+    <ClInclude Include="$(SDLDir)\SDL_main.h" />
+    <ClInclude Include="$(SDLDir)\SDL_mixer.h" />
+    <ClInclude Include="$(SDLDir)\SDL_mouse.h" />
+    <ClInclude Include="$(SDLDir)\SDL_mutex.h" />
+    <ClInclude Include="$(SDLDir)\SDL_platform.h" />
+    <ClInclude Include="$(SDLDir)\SDL_quit.h" />
+    <ClInclude Include="$(SDLDir)\SDL_rwops.h" />
+    <ClInclude Include="$(SDLDir)\SDL_stdinc.h" />
+    <ClInclude Include="$(SDLDir)\SDL_thread.h" />
+    <ClInclude Include="$(SDLDir)\SDL_timer.h" />
+    <ClInclude Include="$(SDLDir)\SDL_ttf.h" />
+    <ClInclude Include="$(SDLDir)\SDL_types.h" />
+    <ClInclude Include="$(SDLDir)\SDL_version.h" />
+    <ClInclude Include="$(SDLDir)\SDL_video.h" />
   </ItemGroup>
   <ItemGroup Label="CommonHeaders">
     <ClInclude Include="..\src\common\angband.h" />
@@ -397,6 +401,7 @@
     <Image Include="..\lib\tiles\nomad\8x16.png" />
     <Image Include="..\lib\tiles\old\8x8.png" />
     <Image Include="..\lib\tiles\shockbolt\64x64.png" />
+    <Image Include="..\src\win\angband.ico" />
     <Image Include="..\src\win\angbandVS.ico" />
   </ItemGroup>
   <ItemGroup>

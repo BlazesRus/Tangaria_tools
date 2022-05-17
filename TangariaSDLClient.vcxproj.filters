@@ -387,98 +387,101 @@
     <ClInclude Include="..\src\client\c-angband.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\begin_code.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\begin_code.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\close_code.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\close_code.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_active.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_active.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_audio.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_audio.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_cdrom.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_cdrom.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_config.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_config.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_config_win32.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_config_win32.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_cpuinfo.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_cpuinfo.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_endian.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_endian.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_error.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_error.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_events.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_events.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_image.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_image.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_joystick.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_joystick.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_keyboard.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_keyboard.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_keysym.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_keysym.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_loadso.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_loadso.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_main.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_main.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_mixer.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_mixer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_mouse.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_mouse.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_mutex.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_mutex.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_platform.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_platform.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_quit.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_quit.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_rwops.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_rwops.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_stdinc.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_stdinc.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_thread.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_thread.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_timer.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_timer.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_ttf.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_ttf.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_types.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_types.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_version.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_version.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\_SDL\SDL_video.h">
-      <Filter>SDL</Filter>
+    <ClInclude Include="$(SDLDir)\SDL_video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\win\resource.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -512,8 +515,11 @@
     <Image Include="..\lib\tiles\shockbolt\64x64.png">
       <Filter>Resource Files\tiles\shockbolt</Filter>
     </Image>
+    <Image Include="..\src\win\angbandVS.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
     <Image Include="..\src\win\angband.ico">
-      <Filter>Resource Files\sounds</Filter>
+      <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -2068,8 +2074,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\src\win\angband.rc">
-      <Filter>Resource Files\sounds</Filter>
+    <ResourceCompile Include="..\src\win\angbandVS.rc">
+      <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
