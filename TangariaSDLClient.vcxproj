@@ -58,48 +58,93 @@
   $([System.IO.Path]::GetFullPath('XXX'))
   -->
   <!--Assuming Project Files is SubFolder of Main Project Root-->
+  <!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
   <PropertyGroup Label="UserMacros">
-    <ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\'))</ParentOfRoot>
+    <ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfRoot>
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
-    <LibSrcDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibSrcDir>
+    <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
+    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL2Output\'))</SDLOutputDir>
+    <NetcodeType>WinsockNetcode</NetcodeType>
+    <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
+    <SDLLibraryType>ExternalSDL2</SDLLibraryType>
+    <LibraryUsageMode>UsingLibFiles</LibraryUsageMode>
+    <!--Use DLLInsteadOfLib as alternative option later-->
   </PropertyGroup>
   <PropertyGroup>
-    <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\zlib-win64\'))</ZLibDir>
-    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
-    <ZLibLibrary Condition="!Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
-    <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL>
+    <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\zlib-win64\'))</ZLibDir> -->
+    <ZLibLibrary Condition="'$(ZLibLibrary)'=='' Or !Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
+    <!--     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\zlib.dll'))</ZLibDLL> -->
   </PropertyGroup>
   <PropertyGroup>
-    <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)'))</LibPngDir> -->
+    <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\libpng\'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
     <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
-    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
+    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(RootDirectory)IntegratedDLLs\$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
-  <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
-  <PropertyGroup>
-    <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL'))</SDLDir>
-    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL2Output\'))</SDLOutputDir>
-    <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
-    <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
-    <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
-    <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
-    <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
-    <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL_net.lib'))</SDLNetLibrary>
+  <Choose>
+    <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
+    <When Condition="'$(SDLLibraryType)'=='ExternalSDL2'">
+      <PropertyGroup>
+        <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL\include\'))</SDLDir>
+        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
+        <SDLImageDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_image\'))</SDLImageDir>
+        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
+        <SDLMixerDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_mixer\include\'))</SDLMixerDir>
+        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
+        <SDLTTFDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_ttf\'))</SDLTTFDir>
+        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
+        <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL_net.lib'))</SDLNetLibrary>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(SDLLibraryType)'=='SDL2'">
+      <PropertyGroup>
+        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
+        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
+        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
+        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
+        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(SDLLibraryType)'=='LegacySDL'">
+      <!--SDL libraries at root of SDL Directory(Likely to prevent using libs for both Win32 and x64)-->
+      <PropertyGroup>
+        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
+        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
+        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_image.lib'))</SDLImageLibrary>
+        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_mixer.lib'))</SDLMixerLibrary>
+        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <!--SDL 1.X Option-->
+      <PropertyGroup>
+        <SDLLibraryType Condition="'$(SDLLibraryType)'!='SDL'">SDL</SDLLibraryType>
+        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
+        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL.lib'))</SDLLibrary>
+        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_image.lib'))</SDLImageLibrary>
+        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_mixer.lib'))</SDLMixerLibrary>
+        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\SDL_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <PropertyGroup Label="GlobalIncludes">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(IncludePath);$(SDLDir)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(SDLDir)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)..\lib\um\x86;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)...\lib\um\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(SDLDir)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)..\lib\um\x64;</LibraryPath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Label="AlternativeIncludePaths">
-    <IncludePath Condition="'$(ZLibDir)'!=''">$(ZLibDir);%(IncludePath)</IncludePath>
-    <IncludePath Condition="'$(LibPngDir)'!=''">$(LibPngDir);%(IncludePath)</IncludePath>
+  <PropertyGroup Label="ExtraIncludes">
+    <IncludePath Condition="'$(SDLLibraryType)'=='ExternalSDL2'">$(IncludePath);$(SDLImageDir);$(SDLMixerDir);$(SDLTTFDir);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
     <OutDir>.\$(Configuration)_$(Platform)\</OutDir>
@@ -119,11 +164,18 @@
       <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
       <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <!--Replace Winsock code with SDL_net code later-->
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">_DEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;SOUND_SDL2;USE_SDL2;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">NDEBUG;SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;SOUND_SDL2;USE_SDL2;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='ExternalSDL2' Or '$(SDLLibraryType)'=='SDL2'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='ExternalSDL2'">%(PreprocessorDefinitions);USE_EXTERNALSDL2;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='LegacySDL' Or '$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
+      <!-- 	  <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions> -->
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard_C>stdc11</LanguageStandard_C>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <CompileAs>CompileAsC</CompileAs>
+      <DisableSpecificWarnings>4703;2057;2055</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -132,20 +184,25 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies Condition="'$(ZLibLibrary)'!=''">$(ZLibLibrary);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(LibPngLibrary)'!=''">$(LibPngLibrary);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies>%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);$(SDLNetLibrary);</AdditionalDependencies>
+      <!--       <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies> -->
+      <AdditionalDependencies>%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
+      <!--       <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Configuration)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies> -->
       <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy  "$(LibSrcDir)" "$(OutDir)lib" /s /e /y /d</Command>
+      <Command>xcopy  "$(LibDataDir)" "$(OutDir)lib" /s /e /y /d</Command>
     </CustomBuildStep>
+    <!--
     <CustomBuildStep Condition="!Exists('$(ZLibLibrary)')">
       <Command>xcopy $(LibPngLibrary) $(OutDir) /DY </Command>
     </CustomBuildStep>
     <CustomBuildStep Condition="!Exists('$(LibPngLibrary)')">
       <Command>xcopy $(LibPngLibrary) $(OutDir) /DY </Command>
     </CustomBuildStep>
+-->
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
     <ClInclude Include="..\src\win\png.h" Condition="'$(LibPngDir)'==''">
@@ -172,7 +229,6 @@
 -->
     <ClInclude Include="..\src\win\readdib.h">
     </ClInclude>
-    <ClInclude Include="..\src\win\resource.h" />
     <ClInclude Include="..\src\win\win-menu.h" />
     <ClInclude Include="..\src\win\win-term.h" />
     <ClCompile Include="..\src\win\readdib.c">
@@ -180,6 +236,9 @@
     <ClCompile Include="..\src\win\readpng.c">
     </ClCompile>
     <ClCompile Include="..\src\win\scrnshot.c" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup Label="SDLHeaders">
     <ClInclude Include="$(SDLDir)\begin_code.h" />
     <ClInclude Include="$(SDLDir)\close_code.h" />
     <ClInclude Include="$(SDLDir)\SDL.h" />
@@ -349,6 +408,12 @@
     <ClInclude Include="..\src\client\ui-term.h" />
   </ItemGroup>
   <ItemGroup Label="ClientSrc">
+    <ClCompile Include="..\src\client\main-sdl.c">
+      <ExcludedFromBuild Condition="'$(Configuration)'=='ExternalSDL2' Or '$(Configuration)'=='SDL2'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\client\main-sdl2.c">
+      <ExcludedFromBuild Condition="'$(Configuration)'=='LegacySDL' Or '$(Configuration)'=='SDL'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\src\client\c-cmd-obj.c" />
     <ClCompile Include="..\src\client\c-cmd.c" />
     <ClCompile Include="..\src\client\c-option.c" />
@@ -358,7 +423,6 @@
     <ClCompile Include="..\src\client\game-event.c" />
     <ClCompile Include="..\src\client\game-input.c" />
     <ClCompile Include="..\src\client\grafmode.c" />
-    <ClCompile Include="..\src\client\main-sdl.c" />
     <ClCompile Include="..\src\client\main-win.c" />
     <ClCompile Include="..\src\client\main.c" />
     <ClCompile Include="..\src\client\netclient.c" />
@@ -402,10 +466,6 @@
     <Image Include="..\lib\tiles\old\8x8.png" />
     <Image Include="..\lib\tiles\shockbolt\64x64.png" />
     <Image Include="..\src\win\angband.ico" />
-    <Image Include="..\src\win\angbandVS.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="..\src\win\angbandVS.rc" />
   </ItemGroup>
   <ItemGroup Label="GameDataStuff">
     <Text Include="..\lib\gamedata\activation.txt" />
@@ -856,6 +916,9 @@
     <Media Include="..\lib\sounds\wild_waste.mp3" />
     <Media Include="..\lib\sounds\wild_wolf.mp3" />
     <Media Include="..\lib\sounds\wilhelm-scream.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\src\win\MbandClient.rc" />
   </ItemGroup>
   <!--   <ItemGroup>
     <None Include="..\lib\sounds\afraid.ogg" />
