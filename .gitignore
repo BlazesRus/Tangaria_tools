@@ -13,6 +13,6 @@
 **/Win64/Release/**
 x_Tangaria_build/PWMAngband/**
 *.user
-
+*.res
 
 
