@@ -61,36 +61,33 @@
     <Filter Include="Source Files\CommonFiles">
       <UniqueIdentifier>{53391cf0-0f1c-4772-ab02-ca1d523d156c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SPHeader Files">
+      <UniqueIdentifier>{63f7b4ba-aafd-4b22-b2e6-760c2062d65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SPSource Files">
+      <UniqueIdentifier>{99be2049-e012-4597-ad69-f2705c8e270e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAndScreenshotManipulation">
+      <UniqueIdentifier>{5550dbf6-2654-4b44-8239-6a6e5cf1f82e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAndScreenshotManipulation\Source">
+      <UniqueIdentifier>{abe91c0c-9d09-4b83-bf40-62c48d665d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAndScreenshotManipulation\Headers">
+      <UniqueIdentifier>{e5a946dc-d90a-4ca1-8297-96cc2cf7d5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAndScreenshotManipulation\ZLibHeaders">
+      <UniqueIdentifier>{070ae9af-cf3e-4761-8838-47556cc233e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImageAndScreenshotManipulation\LibPngHeaders">
+      <UniqueIdentifier>{1058f912-d541-4091-a063-bbf9615399fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(RootDirectory)src\win\png.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\pngconf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\pnglibconf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\win-menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\win-term.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(RootDirectory)src\common\angband.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="$(RootDirectory)src\client\mangclient_sdlPCH1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SDLDir)\begin_code.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SDLDir)\close_code.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -183,6 +180,30 @@
     <ClInclude Include="$(SDLDir)\SDL_video.h">
       <Filter>SDL</Filter>
     </ClInclude>
+    <ClInclude Include="$(SDLDir)\begin_code.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SDLDir)\close_code.h">
+      <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\png.h">
+      <Filter>ImageAndScreenshotManipulation\LibPngHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\pngconf.h">
+      <Filter>ImageAndScreenshotManipulation\LibPngHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\pnglibconf.h">
+      <Filter>ImageAndScreenshotManipulation\LibPngHeaders</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
+      <Filter>ImageAndScreenshotManipulation\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\win-menu.h">
+      <Filter>ImageAndScreenshotManipulation\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\win-term.h">
+      <Filter>ImageAndScreenshotManipulation\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="$(RootDirectory)lib\icons\att-16.png">
@@ -205,20 +226,999 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(RootDirectory)src\win\readdib.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(RootDirectory)src\win\readpng.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(RootDirectory)src\win\scrnshot.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl2.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(RootDirectory)src\win\readdib.c">
+      <Filter>ImageAndScreenshotManipulation\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(RootDirectory)src\win\scrnshot.c">
+      <Filter>ImageAndScreenshotManipulation\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="$(RootDirectory)src\win\readpng.c">
+      <Filter>ImageAndScreenshotManipulation\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(SPRoot)buildid.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cave.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cave-map.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cave-square.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cave-view.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-cave.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-core.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-misc.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-obj.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-pickup.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-spoil.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)cmd-wizard.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)datafile.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)debug.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)effect-handler-attack.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)effect-handler-general.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)effects-info.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)effects.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)game-event.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)game-input.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)game-world.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)gen-cave.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)gen-chunk.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)generate.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)gen-monster.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)gen-room.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)gen-util.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)grafmode.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)guid.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)init.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)load.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)main-win.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)message.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-attack.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-blows.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-desc.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-group.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-init.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-list.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-lore.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-make.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-move.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-msg.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-predicate.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-spell.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-summon.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-timed.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)mon-util.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-chest.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-curse.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-desc.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-gear.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-ignore.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-info.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-init.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-knowledge.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-list.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-make.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-pile.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-power.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-properties.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-randart.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-slays.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-tval.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)option.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)parser.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-attack.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-birth.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-calcs.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-class.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-history.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-path.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-quest.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-race.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-spell.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-timed.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-util.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)project.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)project-feat.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)project-mon.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)project-obj.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)project-player.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)randname.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)save-charoutput.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)save.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)savefile.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)score.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)sound-core.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)source.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)store.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)target.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)trap.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-birth.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-command.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-context.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-curse.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-death.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-display.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-effect.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-event.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-game.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-help.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-history.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-init.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-input.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-keymap.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-knowledge.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-map.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-menu.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-mon-list.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-mon-lore.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-object.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-obj-list.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-options.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-output.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-player-properties.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-player.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-prefs.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-score.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-signals.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-spell.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-spoil.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-store.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-target.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-term.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-wizard.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)wiz-debug.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)wiz-spoil.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)wiz-stats.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-bitflag.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-color.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-dice.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-expression.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-file.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-form.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-quark.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-queue.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-rand.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-set.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-textblock.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-type.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-util.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)z-virt.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)win\readdib.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)win\readpng.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)win\scrnshot.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)win\win-layout.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)obj-util.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-entry.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-entry-combiner.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-entry-renderers.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-equip-cmp.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)ui-visuals.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(SPRoot)player-properties.c">
+      <Filter>SPSource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(SPRoot)alloc.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)angband.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)buildid.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)cave.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)cmd-core.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)cmds.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)config.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)datafile.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)debug.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)effect-handler.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)effects-info.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)effects.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)game-event.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)game-input.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)game-world.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)generate.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)grafmode.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)guid.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)h-basic.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)hint.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)init.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-dun-profiles.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-effects.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-elements.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-equip-slots.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-history-types.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-ignore-types.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-kind-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-message.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-mon-message.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-mon-race-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-mon-spells.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-mon-temp-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-mon-timed.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-object-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-object-modifiers.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-options.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-origins.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-parser-errors.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-player-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-player-timed.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-projections.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-randart-properties.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-rooms.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-room-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-square-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-stats.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-terrain-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-trap-flags.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-tvals.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)list-ui-entry-renderers.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)message.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-attack.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-blows.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-desc.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-group.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-init.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-list.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-lore.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-make.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-move.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-msg.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-predicate.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-spell.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)monster.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-summon.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-timed.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)mon-util.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-chest.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-curse.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-desc.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)object.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-gear.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-ignore.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-info.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-init.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-knowledge.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-list.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-make.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-pile.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-power.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-properties.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-randart.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-slays.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-tval.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)obj-util.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)option.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)parser.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-attack.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-birth.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-calcs.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-history.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-path.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-quest.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-spell.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-timed.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-util.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)project.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)randname.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)save-charoutput.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)savefile.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)score.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)snd-sdl.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)snd-win.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)sound.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)source.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)store.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)target.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)trap.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-birth.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-command.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-context.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-curse.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-death.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-display.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-effect.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-event.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-game.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-help.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-history.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-init.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-input.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-keymap.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-knowledge.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-map.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-menu.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-mon-list.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-mon-lore.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-object.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-obj-list.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-options.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-output.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-player-properties.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-player.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-prefs.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-score.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-signals.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-spell.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-spoil.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-store.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-target.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-term.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-visuals.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-wizard.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)wizard.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-bitflag.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-color.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-debug.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-dice.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-expression.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-file.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-form.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-quark.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-queue.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-rand.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-set.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-textblock.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-type.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-util.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)z-virt.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)win\readdib.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)win\win-menu.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)win\win-term.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-entry.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-entry-combiner.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-entry-init.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-entry-renderers.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)ui-equip-cmp.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SPRoot)player-properties.h">
+      <Filter>SPHeader Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
