@@ -629,6 +629,31 @@
             <BuildOrder>72</BuildOrder>
             <IgnorePath>true</IgnorePath>
         </LibFiles>
+        <LibFiles Include="..\..\TangeriaCoop\src\_SDL\x64\freetype.lib" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{3F3F4E84-47F1-4BF4-B912-FDFD38A4535A}</VirtualFolder>
+            <BuildOrder>68</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\TangeriaCoop\src\_SDL\x64\SDL.lib" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{3F3F4E84-47F1-4BF4-B912-FDFD38A4535A}</VirtualFolder>
+            <BuildOrder>69</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\TangeriaCoop\src\_SDL\x64\SDL_image.lib" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{3F3F4E84-47F1-4BF4-B912-FDFD38A4535A}</VirtualFolder>
+            <BuildOrder>70</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\TangeriaCoop\src\_SDL\x64\SDL_mixer.lib" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{3F3F4E84-47F1-4BF4-B912-FDFD38A4535A}</VirtualFolder>
+            <BuildOrder>71</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
+        <LibFiles Include="..\..\TangeriaCoop\src\_SDL\x64\SDL_ttf.lib" Condition="'$(Platform)'=='Win64'">
+            <VirtualFolder>{3F3F4E84-47F1-4BF4-B912-FDFD38A4535A}</VirtualFolder>
+            <BuildOrder>72</BuildOrder>
+            <IgnorePath>true</IgnorePath>
+        </LibFiles>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -712,6 +737,24 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="..\..\TangeriaCoop\src\_SDL\x64\SDL_image.lib" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Wi64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\TangeriaCoop\src\_SDL\x64\SDL_ttf.lib" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\TangeriaCoop\src\_SDL\x64\SDL_mixer.lib" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="..\..\TangeriaCoop\src\client\ui-store.c" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
@@ -788,6 +831,12 @@
                 </DeployFile>
                 <DeployFile LocalName="..\..\TangeriaCoop\src\_SDL\SDL.lib" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\TangeriaCoop\src\_SDL\x64\SDL.lib" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
