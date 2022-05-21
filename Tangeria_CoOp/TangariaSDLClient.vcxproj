@@ -60,12 +60,12 @@
   <!--Assuming Project Files is SubFolder of Main Project Root-->
   <!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
   <PropertyGroup Label="UserMacros">
-    <ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfRoot>
-    <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\PWMAngband\'))</RootDirectory>
+    <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
+    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
-    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL2Output\'))</SDLOutputDir>
+    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL2Output\'))</SDLOutputDir>
     <NetcodeType>WinsockNetcode</NetcodeType>
     <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
     <SDLLibraryType>LegacySDL</SDLLibraryType>
@@ -76,12 +76,12 @@
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)"  Condition="exists('$(UserProjectSettingsFile)')"/>
   <PropertyGroup>
-    <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\zlib-win64\'))</ZLibDir> -->
+    <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\zlib-win64\'))</ZLibDir> -->
     <ZLibLibrary Condition="'$(ZLibLibrary)'=='' Or !Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
     <ZLibDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
   <PropertyGroup>
-    <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)\libpng\'))</LibPngDir> -->
+    <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\libpng\'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
     <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\libpng.lib'))</LibPngLibrary>
     <LibPngDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.dll'))</LibPngDLL>
@@ -90,13 +90,13 @@
     <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
     <When Condition="'$(SDLLibraryType)'=='ExternalSDL2'">
       <PropertyGroup>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL\include\'))</SDLDir>
+        <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL\include\'))</SDLDir>
         <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
-        <SDLImageDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_image\'))</SDLImageDir>
+        <SDLImageDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_image\'))</SDLImageDir>
         <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
-        <SDLMixerDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_mixer\include\'))</SDLMixerDir>
+        <SDLMixerDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_mixer\include\'))</SDLMixerDir>
         <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL_ttf\'))</SDLTTFDir>
+        <SDLTTFDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_ttf\'))</SDLTTFDir>
         <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
         <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
         <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL_net.lib'))</SDLNetLibrary>

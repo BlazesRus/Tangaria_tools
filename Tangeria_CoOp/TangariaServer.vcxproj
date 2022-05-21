@@ -59,12 +59,12 @@
   -->
   <!--Assuming Project Files is SubFolder of Main Project Root-->
   <PropertyGroup Label="UserMacros">
-    <ParentOfRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfRoot>
-    <RootDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\PWMAngband\'))</RootDirectory>
+    <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
+    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
-    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfRoot)SDL2Output\'))</SDLOutputDir>
+    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL2Output\'))</SDLOutputDir>
     <NetcodeType>WinsockNetcode</NetcodeType>
     <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
 	<UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaServer.vcxproj.user'))</UserProjectSettingsFile>
