@@ -70,15 +70,15 @@
     <When Condition="'$(SDLLibraryType)'=='ExternalSDL2'">
       <PropertyGroup>
         <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL\include\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2.lib'))</SDLLibrary>
+        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2.lib'))</SDLLibrary>
         <SDLImageDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_image\'))</SDLImageDir>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_image.lib'))</SDLImageLibrary>
+        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
         <SDLMixerDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_mixer\include\'))</SDLMixerDir>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_mixer.lib'))</SDLMixerLibrary>
+        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
         <SDLTTFDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_ttf\'))</SDLTTFDir>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\freetype.lib'))</FreeTypeLibrary>
-        <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\$(Configuration)\SDL_net.lib'))</SDLNetLibrary>
+        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
+        <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL_net.lib'))</SDLNetLibrary>
       </PropertyGroup>
     </When>
     <When Condition="'$(SDLLibraryType)'=='SDL2'">
