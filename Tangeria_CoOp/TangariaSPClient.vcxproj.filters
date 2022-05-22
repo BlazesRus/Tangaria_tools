@@ -675,18 +675,6 @@
     <ClCompile Include="$(SPRoot)z-virt.c">
       <Filter>SPSource Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(SPRoot)win\readdib.c">
-      <Filter>SPSource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SPRoot)win\readpng.c">
-      <Filter>SPSource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SPRoot)win\scrnshot.c">
-      <Filter>SPSource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(SPRoot)win\win-layout.c">
-      <Filter>SPSource Files</Filter>
-    </ClCompile>
     <ClCompile Include="$(SPRoot)obj-util.c">
       <Filter>SPSource Files</Filter>
     </ClCompile>
@@ -1193,15 +1181,6 @@
     <ClInclude Include="$(SPRoot)z-virt.h">
       <Filter>SPHeader Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(SPRoot)win\readdib.h">
-      <Filter>SPHeader Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SPRoot)win\win-menu.h">
-      <Filter>SPHeader Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SPRoot)win\win-term.h">
-      <Filter>SPHeader Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(SPRoot)ui-entry.h">
       <Filter>SPHeader Files</Filter>
     </ClInclude>
@@ -1220,5 +1199,8 @@
     <ClInclude Include="$(SPRoot)player-properties.h">
       <Filter>SPHeader Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SPNotes.txt" />
   </ItemGroup>
 </Project>

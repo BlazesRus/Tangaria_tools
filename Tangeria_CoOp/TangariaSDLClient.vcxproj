@@ -25,40 +25,13 @@
     <RootNamespace>Mangband</RootNamespace>
     <ProjectName>mangclient_sdl</ProjectName>
     <PlatformToolset>v142</PlatformToolset>
-    <!-- 142 for VS2019(Default);143 for VS2022-->
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16' Or '$(VisualStudioVersion)' == ''">v142</PlatformToolset>
-    <PlatformToolset Condition="'$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Label="GlobalsPart2">
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules />
-    <CodeAnalysisRuleAssemblies />
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <!--
   Converting Relative to Absolute Path based on https://stackoverflow.com/questions/176931/how-can-i-get-msbuild-to-evaluate-and-print-the-full-path-when-given-a-relative
   $([System.IO.Path]::GetFullPath('XXX'))
   -->
-  <!--Assuming Project Files is SubFolder of Main Project Root-->
-  <!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
   <PropertyGroup Label="UserMacros">
     <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
@@ -68,23 +41,29 @@
     <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL2Output\'))</SDLOutputDir>
     <NetcodeType>WinsockNetcode</NetcodeType>
     <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
-    <SDLLibraryType>LegacySDL</SDLLibraryType>
-	<UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
+    <SDLLibraryType>LegacySDL</SDLLibraryType><!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
     <!--Option of Modern for later C or ANSI for C99/C89-->
     <CStandardType>ANSI</CStandardType>
+	<UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)"  Condition="exists('$(UserProjectSettingsFile)')"/>
+  <PropertyGroup Label="ToolsetOptions">
+  	<PlatformToolset Condition="'$(CStandardType)' == 'ANSI'">ClangCL</PlatformToolset>
+    <!-- 142 for VS2019(Default);143 for VS2022-->
+    <PlatformToolset Condition="'$(CStandardType)' != 'ANSI' And ('$(VisualStudioVersion)' == '16' Or '$(VisualStudioVersion)' == '')">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(CStandardType)' != 'ANSI' And '$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
+  </PropertyGroup>
   <PropertyGroup>
     <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\zlib-win64\'))</ZLibDir> -->
     <ZLibLibrary Condition="'$(ZLibLibrary)'=='' Or !Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
-    <ZLibDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.dll'))</ZLibDLL>
+    <ZLibDLL Condition="'$(ZLibDLL)'=='' Or !Exists('$(ZLibDLL)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.dll'))</ZLibDLL>
   </PropertyGroup>
   <PropertyGroup>
     <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\libpng\'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
     <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\libpng.lib'))</LibPngLibrary>
-    <LibPngDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.dll'))</LibPngDLL>
+    <LibPngDLL Condition="'$(LibPngDLL)'=='' Or !Exists('$(LibPngDLL)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.dll'))</LibPngDLL>
   </PropertyGroup>
   <Choose>
     <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
@@ -134,30 +113,42 @@
         <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)freetype.lib'))</FreeTypeLibrary>
       </PropertyGroup>
     </When>
-    <When Condition="'$(SDLLibraryType)'=='HybridSDL'">
-      <PropertyGroup>
-        <SDLLibraryType>SDL</SDLLibraryType>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2.lib'))</SDLLibrary>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
-      </PropertyGroup>
-    </When>
     <Otherwise>
-      <!--SDL 1.X Option-->
+      <!--SDL 1.X Option Or Custom SDL Configuration-->
       <PropertyGroup>
-        <SDLLibraryType Condition="'$(SDLLibraryType)'!='SDL'">SDL</SDLLibraryType>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL.lib'))</SDLLibrary>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
+        <SDLLibraryType Condition="'$(SDLLibraryType)'==''">SDL</SDLLibraryType>
+        <SDLDir Condition="'$(SDLDir)'==''">$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
+        <SDLLibrary Condition="'$(SDLLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL.lib'))</SDLLibrary>
+        <SDLImageLibrary Condition="'$(SDLImageLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_image.lib'))</SDLImageLibrary>
+        <SDLMixerLibrary Condition="'$(SDLMixerLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
+        <SDLTTFLibrary Condition="'$(SDLTTFLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
+        <FreeTypeLibrary Condition="'$(FreeTypeLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
       </PropertyGroup>
     </Otherwise>
   </Choose>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="GlobalsPart2">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+    <CodeAnalysisRuleAssemblies />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+<!--UserMacros Moved to Top for PlatformToolset changes-->
   <PropertyGroup Label="GlobalIncludes">
     <IncludePath>$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(SDLDir)</IncludePath>
   </PropertyGroup>
