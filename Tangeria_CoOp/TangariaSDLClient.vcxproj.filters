@@ -61,6 +61,9 @@
     <Filter Include="Source Files\CommonFiles">
       <UniqueIdentifier>{53391cf0-0f1c-4772-ab02-ca1d523d156c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FilesExclusiveToBranch">
+      <UniqueIdentifier>{9b63775e-d07e-4b85-ba3f-c151f3f65366}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(RootDirectory)src\win\png.h">
@@ -721,10 +724,5 @@
     <ClCompile Include="$(RootDirectory)src\client\main-sdl.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="$(RootDirectory)src\win\MbandClient.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

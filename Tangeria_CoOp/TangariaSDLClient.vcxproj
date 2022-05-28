@@ -17,6 +17,15 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <!--(C89 for ClangToolset C89 Version)-->
+    <ProjectConfiguration Include="ReleaseC99|Win32">
+      <Configuration>ReleaseC99</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseC99|x64">
+      <Configuration>ReleaseC99</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -28,105 +37,46 @@
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
-  <!--
-  Converting Relative to Absolute Path based on https://stackoverflow.com/questions/176931/how-can-i-get-msbuild-to-evaluate-and-print-the-full-path-when-given-a-relative
-  $([System.IO.Path]::GetFullPath('XXX'))
-  -->
   <PropertyGroup Label="UserMacros">
+    <!--<ToolsRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</ToolsRoot>-->
     <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
-    <SDLOutputDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL2Output\'))</SDLOutputDir>
-    <NetcodeType>WinsockNetcode</NetcodeType>
-    <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
-    <SDLLibraryType>SDL2</SDLLibraryType><!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
-    <!--Option of Modern for later C,ANSI for C99/C89-->
-	<!--Not as viable options: ClangToolset for C89(minus some upgrades to language that Rad Studio and such add to language)-->
-    <CStandardType>Modern</CStandardType>
-	<UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
-  </PropertyGroup>
-  <!--Import macro overrides from user props-->
-  <Import Project="$(UserProjectSettingsFile)"  Condition="exists('$(UserProjectSettingsFile)')"/>
-  <PropertyGroup Label="ToolsetOptions">
-  	<PlatformToolset Condition="'$(CStandardType)' == 'ClangToolset'">ClangCL</PlatformToolset>
-    <!-- 142 for VS2019(Default);143 for VS2022-->
-    <PlatformToolset Condition="'$(CStandardType)' != 'ClangToolset' And ('$(VisualStudioVersion)' == '16' Or '$(VisualStudioVersion)' == '')">v142</PlatformToolset>
-    <PlatformToolset Condition="'$(CStandardType)' != 'ClangToolset' And '$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup>
-    <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\zlib-win64\'))</ZLibDir> -->
-    <ZLibLibrary Condition="'$(ZLibLibrary)'=='' Or !Exists('$(ZLibLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\zlib.lib'))</ZLibLibrary>
-    <ZLibDLL Condition="'$(ZLibDLL)'=='' Or !Exists('$(ZLibDLL)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.dll'))</ZLibDLL>
-  </PropertyGroup>
-  <PropertyGroup>
-    <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\libpng\'))</LibPngDir> -->
-    <!--Define LibPngDir to use non-default LibPng directory-->
-    <LibPngLibrary Condition="!Exists('$(LibPngLibrary)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\$(Configuration)\libpng.lib'))</LibPngLibrary>
-    <LibPngDLL Condition="'$(LibPngDLL)'=='' Or !Exists('$(LibPngDLL)')">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.dll'))</LibPngDLL>
+    <NetcodeType Condition="'$(NetcodeType)'==''">WinsockNetcode</NetcodeType>
+    <CStandardType Condition="'$(Configuration)'=='ReleaseC99'">ClangToolset</CStandardType>
+    <CStandardType Condition="'$(CStandardType)'==''">Modern</CStandardType>
+    <SDLLibraryType>SDL2</SDLLibraryType>
+	<stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
+    <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Choose>
-    <!-- Using SDL 2.X files (including SDL_Net later to replace WinSocket code)-->
-    <When Condition="'$(SDLLibraryType)'=='ExternalSDL2'">
+    <When Condition="'$(Configuration)' == 'Debug'">
       <PropertyGroup>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL\include\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2.lib'))</SDLLibrary>
-        <SDLImageDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_image\'))</SDLImageDir>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
-        <SDLMixerDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_mixer\include\'))</SDLMixerDir>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_ttf\'))</SDLTTFDir>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
-        <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLOutputDir)$(Platform)\SDL_net.lib'))</SDLNetLibrary>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(SDLLibraryType)'=='SDL2'">
-      <PropertyGroup>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2.lib'))</SDLLibrary>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(SDLLibraryType)'=='LegacySDL2'">
-      <!--SDL libraries at root of SDL Directory(Likely to prevent using libs for both Win32 and x64)-->
-      <PropertyGroup>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL2.lib'))</SDLLibrary>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL2_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL2_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)freetype.lib'))</FreeTypeLibrary>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(SDLLibraryType)'=='LegacySDL'">
-      <!--SDL libraries at root of SDL Directory(Likely to prevent using libs for both Win32 and x64)-->
-      <PropertyGroup>
-        <SDLDir>$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
-        <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL.lib'))</SDLLibrary>
-        <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)SDL_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLDir)freetype.lib'))</FreeTypeLibrary>
+        <ConfigurationStyle>Debug</ConfigurationStyle>
       </PropertyGroup>
     </When>
     <Otherwise>
-      <!--SDL 1.X Option Or Custom SDL Configuration-->
       <PropertyGroup>
-        <SDLLibraryType Condition="'$(SDLLibraryType)'==''">SDL</SDLLibraryType>
-        <SDLDir Condition="'$(SDLDir)'==''">$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL\'))</SDLDir>
-        <SDLLibrary Condition="'$(SDLLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL.lib'))</SDLLibrary>
-        <SDLImageLibrary Condition="'$(SDLImageLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_image.lib'))</SDLImageLibrary>
-        <SDLMixerLibrary Condition="'$(SDLMixerLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_mixer.lib'))</SDLMixerLibrary>
-        <SDLTTFLibrary Condition="'$(SDLTTFLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\SDL_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary Condition="'$(FreeTypeLibrary)'==''">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
+        <ConfigurationStyle>Release</ConfigurationStyle>
       </PropertyGroup>
     </Otherwise>
   </Choose>
+  <ImportGroup Label="PropertySheets">
+    <!--Load LibPng Options-->
+    <Import Project="LibPngMacros.props" />
+    <!--Load SDL Options-->
+    <Import Project="SDLMacros.props" />
+  </ImportGroup>
+  <!--Import macro overrides from user props-->
+  <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
+  <PropertyGroup Label="ToolsetOptions">
+    <!-- 142 for VS2019(Default);143 for VS2022-->
+    <PlatformToolset Condition="'$(Configuration)' == 'ReleaseC99'">ClangCL</PlatformToolset>
+    <PlatformToolset Condition="'$(Configuration)' != 'ReleaseC99' And '$(VisualStudioVersion)' != '17'">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(Configuration)' != 'ReleaseC99' And '$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
+  </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="GlobalsPart2">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -137,7 +87,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Release'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
@@ -149,9 +99,8 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-<!--UserMacros Moved to Top for PlatformToolset changes-->
-  <PropertyGroup Label="GlobalIncludes">
-    <IncludePath>$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);$(SDLDir)</IncludePath>
+  <PropertyGroup Label="AlternativeIncludePaths">
+    <IncludePath>$(SDLDir);$(stbVectorDir);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);%(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)...\lib\um\x86;$(LibraryPath)</LibraryPath>
@@ -159,66 +108,62 @@
   <PropertyGroup Condition="'$(Platform)'=='x64'">
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
-  <PropertyGroup Label="ExtraIncludes">
-    <IncludePath Condition="'$(SDLLibraryType)'=='ExternalSDL2'">$(IncludePath);$(SDLImageDir);$(SDLMixerDir);$(SDLTTFDir);</IncludePath>
-  </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir>.\$(Configuration)_$(Platform)\</OutDir>
+    <OutDir Condition="'$(Configuration)'=='Debug'">.\$(Configuration)_$(Platform)\</OutDir>
+    <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\TangeriaCoop\</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
     <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Release'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking Condition="'$(Configuration)'=='Release'">true</FunctionLevelLinking>
-      <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
+      <FunctionLevelLinking Condition="'$(ConfigurationStyle)'=='Release'">true</FunctionLevelLinking>
+      <IntrinsicFunctions Condition="'$(ConfigurationStyle)'=='Release'">true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions Condition="'$(CStandardType)'=='Modern'">%(PreprocessorDefinitions);UsingModernC;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(CStandardType)'=='ClangToolset'">%(PreprocessorDefinitions);UsingClangToolset;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(CStandardType)'=='GCCToolset'">%(PreprocessorDefinitions);UsingGCCToolset;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='ExternalSDL2' Or '$(SDLLibraryType)'=='SDL2' Or '$(SDLLibraryType)'=='LegacySDL2'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='ExternalSDL2'">%(PreprocessorDefinitions);USE_EXTERNALSDL2;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='LegacySDL' Or '$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
-      <!-- 	  <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions> -->
-	  <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL2'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <CompileAs>CompileAsC</CompileAs>
       <DisableSpecificWarnings>4703;2057;2055</DisableSpecificWarnings>
-      <LanguageStandard_C Condition="'$(CStandardType)'=='Modern'">stdc20</LanguageStandard_C>
-      <DisableLanguageExtensions Condition="'$(CStandardType)'=='ANSI'">true</DisableLanguageExtensions>
+      <LanguageStandard_C Condition="'$(CStandardType)'!='C89'">stdc17</LanguageStandard_C>
+      <DisableLanguageExtensions Condition="'$(CStandardType)'=='C89'">true</DisableLanguageExtensions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <EnableCOMDATFolding Condition="'$(Configuration)'=='Release'">true</EnableCOMDATFolding>
-      <OptimizeReferences Condition="'$(Configuration)'=='Release'">true</OptimizeReferences>
+      <EnableCOMDATFolding Condition="'$(ConfigurationStyle)'=='Release'">true</EnableCOMDATFolding>
+      <OptimizeReferences Condition="'$(ConfigurationStyle)'=='Release'">true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies Condition="'$(ZLibLibrary)'!=''">$(ZLibLibrary);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(LibPngLibrary)'!=''">$(LibPngLibrary);%(AdditionalDependencies)</AdditionalDependencies>
-      <!--       <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies> -->
       <AdditionalDependencies>%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <CustomBuildStep>
       <Command>xcopy  "$(LibDataDir)" "$(OutDir)lib" /s /e /y /d</Command>
     </CustomBuildStep>
-    <!--
-    <CustomBuildStep Condition="!Exists('$(ZLibLibrary)')">
-      <Command>xcopy $(LibPngLibrary) $(OutDir) /DY </Command>
+    <CustomBuildStep Condition="'$(SDLLibDir)'!=''">
+      <Command>xcopy  "$(SDLLibDir)" "$(OutDir)" /s /e /y /d</Command>
     </CustomBuildStep>
-    <CustomBuildStep Condition="!Exists('$(LibPngLibrary)')">
-      <Command>xcopy $(LibPngLibrary) $(OutDir) /DY </Command>
+    <!--
+    <CustomBuildStep Condition="'$(LibPngDLL)'!=''">
+      <Command>xcopy  "$(LibPngDLL)" "$(OutDir)" /s /e /y /d</Command>
     </CustomBuildStep>
 -->
   </ItemDefinitionGroup>
