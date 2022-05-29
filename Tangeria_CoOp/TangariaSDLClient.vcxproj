@@ -30,7 +30,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{1304C40B-728A-448C-8EBF-3A8C562B8CAC}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.22000.0</WindowsTargetPlatformVersion>
     <RootNamespace>Mangband</RootNamespace>
     <ProjectName>mangclient_sdl</ProjectName>
     <PlatformToolset>v142</PlatformToolset>
@@ -38,17 +38,16 @@
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Label="UserMacros">
-    <!--<ToolsRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</ToolsRoot>-->
     <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
     <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
-    <NetcodeType Condition="'$(NetcodeType)'==''">WinsockNetcode</NetcodeType>
+    <NetcodeType>WinsockNetcode</NetcodeType>
     <CStandardType Condition="'$(Configuration)'=='ReleaseC99'">ClangToolset</CStandardType>
     <CStandardType Condition="'$(CStandardType)'==''">Modern</CStandardType>
     <SDLLibraryType>SDL2</SDLLibraryType>
-	<stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
+    <stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
     <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Choose>
@@ -109,9 +108,10 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir Condition="'$(Configuration)'=='Debug'">.\$(Configuration)_$(Platform)\</OutDir>
-    <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\TangeriaCoop\</OutDir>
+    <OutDir Condition="'$(Configuration)'!='Release'">.\$(Configuration)_$(Platform)\</OutDir>
+    <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\Tangaria_release\</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <CustomBuildAfterTargets>BuildCompile</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
@@ -134,7 +134,7 @@
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;STB_SPRINTF_IMPLEMENTATION;STB_DS_IMPLEMENTATION</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <CompileAs>CompileAsC</CompileAs>
@@ -181,9 +181,9 @@
     <ClInclude Include="$(LibPngDir)pnglibconf.h" Condition="'$(LibPngDir)'!=''">
     </ClInclude>
     <!--
-    <ClInclude Include="..\src\win\zconf.h" Condition="'$(ZLibDir)'==''">
+    <ClInclude Include="$(RootDirectory)src\win\zconf.h" Condition="'$(ZLibDir)'==''">
     </ClInclude>
-    <ClInclude Include="..\src\win\zlib.h" Condition="'$(ZLibDir)'==''">
+    <ClInclude Include="$(RootDirectory)src\win\zlib.h" Condition="'$(ZLibDir)'==''">
     </ClInclude>
     <ClInclude Include="$(ZLibDir)zconf.h" Condition="'$(ZLibDir)'!=''">
     </ClInclude>
@@ -369,14 +369,16 @@
     <ClInclude Include="$(RootDirectory)src\client\ui-spell.h" />
     <ClInclude Include="$(RootDirectory)src\client\ui-store.h" />
     <ClInclude Include="$(RootDirectory)src\client\ui-term.h" />
+    <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.h" />
   </ItemGroup>
   <ItemGroup Label="ClientSrc">
     <ClCompile Include="$(RootDirectory)src\client\main-sdl.c">
-      <ExcludedFromBuild Condition="'$(Configuration)'=='ExternalSDL2' Or '$(Configuration)'=='SDL2'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(SDLLibraryType)'=='SDL2'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl2.c">
-      <ExcludedFromBuild Condition="'$(Configuration)'=='LegacySDL' Or '$(Configuration)'=='SDL'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(SDLLibraryType)'=='SDL'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.c" />
     <ClCompile Include="$(RootDirectory)src\client\c-cmd-obj.c" />
     <ClCompile Include="$(RootDirectory)src\client\c-cmd.c" />
     <ClCompile Include="$(RootDirectory)src\client\c-option.c" />
@@ -424,6 +426,9 @@
     <Image Include="$(RootDirectory)lib\icons\att-32.png" />
     <Image Include="$(RootDirectory)lib\icons\att-512.png" />
     <Image Include="$(RootDirectory)src\win\angband.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(RootDirectory)src\win\MbandClient.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
