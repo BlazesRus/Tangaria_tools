@@ -104,7 +104,7 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir Condition="'$(Configuration)'!='Release'">.\$(Configuration)_$(Platform)\</OutDir>
+    <OutDir Condition="'$(ConfigurationStyle)'=='Debug'">.\Tangaria_Debug\</OutDir>
     <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\Tangaria_release\</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
   </PropertyGroup>
