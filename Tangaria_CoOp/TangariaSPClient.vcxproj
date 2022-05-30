@@ -34,7 +34,7 @@
   -->
   <PropertyGroup Label="UserMacros">
     <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
-    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
+    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangariaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
@@ -42,7 +42,7 @@
     <NetcodeType>WinsockNetcode</NetcodeType>
     <!--Later add netcode option SDLNetCode, to use SDL_net based code for the netcode instead-->
     <SDLLibraryType>SDL2</SDLLibraryType><!--Support for multiple SDL compiles; Change SDLLibraryType value to switch usage of SDL-->
-    <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
+    <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
     <!--Option of Modern for later C or ANSI for C99/C89-->
     <CStandardType>ANSI</CStandardType>
     <SPRoot>

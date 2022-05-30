@@ -39,7 +39,7 @@
   </PropertyGroup>
   <PropertyGroup Label="UserMacros">
     <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
-    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangeriaCoop\'))</RootDirectory>
+    <RootDirectory>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\TangariaCoop\'))</RootDirectory>
     <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
@@ -48,7 +48,7 @@
     <CStandardType Condition="'$(CStandardType)'==''">Modern</CStandardType>
     <SDLLibraryType>SDL2</SDLLibraryType>
     <stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
-    <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangeriaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
+    <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(Configuration)' == 'Debug'">
