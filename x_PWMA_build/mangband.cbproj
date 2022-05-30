@@ -49,9 +49,9 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppConsoleApplication</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <IncludePath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\PWMA\PWMAngband\src\server\;$(IncludePath)</IncludePath>
+        <IncludePath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;PWMAngband\src\server\;$(IncludePath)</IncludePath>
         <Multithreaded>true</Multithreaded>
-        <ILINK_LibraryPath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;D:\GitHub\PWMA\PWMAngband\src\server\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <ILINK_LibraryPath>PWMAngband\src\win\;PWMAngband\src\common\;PWMAngband\src\server\;D:\GitHub\;PWMAngband\src\server\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <_TCHARMapping>char</_TCHARMapping>
         <SanitizedProjectName>mangband</SanitizedProjectName>
     </PropertyGroup>
@@ -88,12 +88,12 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <FinalOutputDir>D:\GitHub\PWMA\PWMAngband\</FinalOutputDir>
+        <FinalOutputDir>PWMAngband\</FinalOutputDir>
         <BCC_Defines>STRICT;BCC_IDE;WINDOWS;$(BCC_Defines)</BCC_Defines>
-        <BCC_IncludePath>D:\GitHub\PWMA\PWMAngband\src\win;D:\GitHub\PWMA\PWMAngband\src\common;$(BCC_IncludePath)</BCC_IncludePath>
+        <BCC_IncludePath>PWMAngband\src\win;PWMAngband\src\common;$(BCC_IncludePath)</BCC_IncludePath>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Manifest_File>(None)</Manifest_File>
-        <BCC_OutputDir>D:\GitHub\PWMA\PWMAngband\</BCC_OutputDir>
+        <BCC_OutputDir>PWMAngband\</BCC_OutputDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <Defines>NDEBUG;$(Defines)</Defines>
@@ -495,6 +495,9 @@
         <CppCompile Include="PWMAngband\src\server\wilderness.c">
             <BuildOrder>125</BuildOrder>
         </CppCompile>
+        <None Include="PWMAngband\src\server\wilderness.h">
+            <BuildOrder>131</BuildOrder>
+        </None>
         <CppCompile Include="PWMAngband\src\server\z-quark.c">
             <BuildOrder>126</BuildOrder>
         </CppCompile>
@@ -691,7 +694,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="D:\GitHub\PWMA\PWMAngband\src\server\main.c" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="PWMAngband\src\server\main.c" Configuration="Debug" Class="ProjectFile">
                     <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>

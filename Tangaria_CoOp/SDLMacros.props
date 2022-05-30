@@ -49,7 +49,7 @@
         <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLImageDir)$(Platform)\SDL2_image.lib'))</SDLImageLibrary>
         <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLMixerDir)$(Platform)\SDL2_mixer.lib'))</SDLMixerLibrary>
         <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLTTFDir)$(Platform)\SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(FreeTypeDir)$(Platform)\freetype.lib'))</FreeTypeLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(FreeTypeDir)$(Platform)\Freetype.lib'))</FreeTypeLibrary>
         <SDLNetLibrary>$([System.IO.Path]::GetFullPath('$(SDLNetDir)$(Platform)\SDL_net.lib'))</SDLNetLibrary>
         <SDLLibraryType Condition="'$(SDLLibraryType)'!='SDL2'">SDL2</SDLLibraryType>
       </PropertyGroup>
@@ -76,7 +76,8 @@
         <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)SDL2_image.lib'))</SDLImageLibrary>
         <SDLMixerLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)SDL2_mixer.lib'))</SDLMixerLibrary>
         <SDLTTFLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)SDL2_ttf.lib'))</SDLTTFLibrary>
-        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)freetype.lib'))</FreeTypeLibrary>
+        <FreeTypeLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)FreetypeFork.lib'))</FreeTypeLibrary>
+		<FreeTypeLibrary Condition="!exists('$(FreeTypeLibrary)')">$([System.IO.Path]::GetFullPath('$(SDLLibDir)freetype.lib'))</FreeTypeLibrary>
       </PropertyGroup>
     </When>
     <Otherwise>
