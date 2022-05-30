@@ -70,6 +70,9 @@
   </ImportGroup>
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
+  <PropertyGroup Label="RenameBasedOnSDL">
+      <TargetName Condition="'$(SDLLibraryType)'=='SDL2'">mangclient_sdl2</TargetName>
+  </PropertyGroup>
   <PropertyGroup Label="ToolsetOptions">
     <!-- 142 for VS2019(Default);143 for VS2022-->
     <PlatformToolset Condition="'$(Configuration)' == 'ReleaseC99'">ClangCL</PlatformToolset>
