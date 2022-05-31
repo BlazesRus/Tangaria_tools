@@ -58,348 +58,27 @@
     <Filter Include="FilesExclusiveToBranch">
       <UniqueIdentifier>{9b63775e-d07e-4b85-ba3f-c151f3f65366}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{f010b325-5fa6-4095-a377-915bb8c8a0d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Client">
+      <UniqueIdentifier>{a92c48c1-0be0-4fbd-84d8-0ebae1314121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{1f674a76-c445-4168-aef9-0ad638226e59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Client">
+      <UniqueIdentifier>{07a6a9ca-8d80-481b-9bf4-ed705f0e2021}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(RootDirectory)src\win\png.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\pngconf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\pnglibconf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\win-menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\win-term.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\angband.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\bit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\buildid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\datafile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\guid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\h-basic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\h-net.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\h-quark.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-elements.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-equip-slots.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-history-types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-ignore-types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-kind-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-mon-message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-mon-race-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-mon-spells.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-mon-temp-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-mon-timed.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-object-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-object-modifiers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-options.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-packets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-parser-errors.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-player-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-player-timed.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-projections.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-square-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-stats.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-trap-flags.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\list-tvals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\md5.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\mon-common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\net-unix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\net-win.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\obj-common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\obj-gear-common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\obj-tval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\option.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\pack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\parser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\player-common-calcs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\player-common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\player-state.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\randname.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\sockbuf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\source.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\store-types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\trap-common.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\version.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-bitflag.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-color.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-defines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-dice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-file.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-msg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-rand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-set.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-spells.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-type.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\common\z-virt.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-term.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-store.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-spell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-prefs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-output.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-options.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-message.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-knowledge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-keymap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-init.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-display.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-death.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-curse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-command.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\ui-birth.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\snd-win.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\snd-sdl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\player-properties.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\netclient.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\mangclient_sdlPCH1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\main.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\grafmode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\game-input.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\game-event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\c-player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\c-option.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\conf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\cmd-core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\c-cmds.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\client\c-angband.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="$(SDLDir)\SDL.h">
+      <Filter>SDL</Filter>
     </ClInclude>
     <ClInclude Include="$(SDLDir)\begin_code.h">
-      <Filter>Header Files</Filter>
+      <Filter>SDL</Filter>
     </ClInclude>
     <ClInclude Include="$(SDLDir)\close_code.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(SDLDir)\SDL.h">
       <Filter>SDL</Filter>
     </ClInclude>
     <ClInclude Include="$(SDLDir)\SDL_active.h">
@@ -488,6 +167,350 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(RootDirectory)src\win\png.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\pngconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\pnglibconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\win-menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\win-term.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(RootDirectory)src\common\angband.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\bit.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\buildid.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\config.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\datafile.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\display.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\guid.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\h-basic.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\h-net.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\h-quark.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-elements.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-equip-slots.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-history-types.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-ignore-types.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-kind-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-message.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-mon-message.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-mon-race-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-mon-spells.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-mon-temp-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-mon-timed.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-object-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-object-modifiers.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-options.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-packets.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-parser-errors.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-player-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-player-timed.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-projections.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-square-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-stats.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-trap-flags.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\list-tvals.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\md5.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\mon-common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\net-unix.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\net-win.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\obj-common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\obj-gear-common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\obj-tval.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\option.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\pack.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\parser.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\player-common-calcs.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\player-common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\player-state.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\randname.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\sockbuf.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\source.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\store-types.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\trap-common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\util.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\version.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-bitflag.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-color.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-defines.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-dice.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-expression.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-file.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-form.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-msg.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-rand.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-set.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-spells.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-type.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-util.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\common\z-virt.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(RootDirectory)src\client\ui-term.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-store.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-spell.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-prefs.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-output.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-options.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-object.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-message.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-menu.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-knowledge.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-keymap.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-input.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-init.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-game.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-event.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-display.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-death.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-curse.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-context.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-command.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\ui-birth.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\sound.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\snd-win.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\snd-sdl.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\player-properties.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\netclient.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\mangclient_sdlPCH1.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\main.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\grafmode.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\game-input.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\game-event.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\c-player.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\c-option.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\conf.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\cmd-core.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\c-cmds.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\client\c-angband.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.h">
+      <Filter>Header Files\Client</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <Image Include="$(RootDirectory)lib\icons\att-16.png">
       <Filter>Resource Files\icons</Filter>
     </Image>
@@ -517,212 +540,213 @@
     <ClCompile Include="$(RootDirectory)src\win\scrnshot.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="$(RootDirectory)src\common\buildid.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\datafile.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\display.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\guid.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\md5.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\net-unix.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\net-win.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\obj-gear-common.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\obj-tval.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\option.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\parser.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\randname.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\sockbuf.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\source.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\util.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-bitflag.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-color.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-dice.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-expression.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-file.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-form.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-rand.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-set.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-type.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-util.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\common\z-virt.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Common</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="$(RootDirectory)src\client\win-layout.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-term.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-store.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-spell.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-prefs.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-output.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-options.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-object.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-message.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-menu.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-knowledge.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-keymap.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-input.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-init.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-game.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-event.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-display.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-death.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-curse.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-context.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-command.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-birth.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\sound-core.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\snd-win.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\snd-sdl.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\set_focus.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\player-properties.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\netclient.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-win.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\grafmode.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\game-input.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\game-event.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\c-player.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\c-option.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\conf.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\cmd-core.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\c-cmd-obj.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\c-cmd.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl2.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
