@@ -64,25 +64,28 @@
     <Filter Include="Header Files\Server">
       <UniqueIdentifier>{d185f26b-fa93-4718-8e0f-a122a1318455}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ZLibPng">
+      <UniqueIdentifier>{7eb31489-8816-4549-9c41-e7a0f497dcca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(RootDirectory)src\win\png.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
     <ClInclude Include="$(RootDirectory)src\win\pngconf.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
     <ClInclude Include="$(RootDirectory)src\win\pnglibconf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
     <ClInclude Include="$(RootDirectory)src\win\win-menu.h">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="$(RootDirectory)src\win\readdib.h">
+      <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
     <ClInclude Include="$(RootDirectory)src\win\win-term.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
