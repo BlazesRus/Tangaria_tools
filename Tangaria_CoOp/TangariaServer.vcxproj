@@ -72,6 +72,8 @@
 	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
     <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
     <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
+    <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
