@@ -43,7 +43,7 @@
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
     <NetcodeType>WinsockNetcode</NetcodeType>
-    <CStandardType Condition="'$(Configuration)'=='ReleaseC99'">ClangToolset</CStandardType>
+    <CStandardType Condition="'$(Configuration)'=='ReleaseC99' Or '$(Configuration)'=='DebugC99'">ClangToolset</CStandardType>
     <CStandardType Condition="'$(CStandardType)'==''">Modern</CStandardType>
     <SDLLibraryType>SDL2</SDLLibraryType>
     <stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
@@ -67,10 +67,16 @@
     <!--Load SDL Options-->
     <Import Project="SDLMacros.props" />
   </ImportGroup>
+  <PropertyGroup Label="OutputDirectoryInfo">
+  	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
+	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
+    <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
+    <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
+  </PropertyGroup>
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
   <PropertyGroup Label="RenameBasedOnSDL">
-      <TargetName Condition="'$(SDLLibraryType)'=='SDL2'">mangclient_sdl2</TargetName>
+    <TargetName Condition="'$(SDLLibraryType)'=='SDL2'">mangclient_sdl2</TargetName>
   </PropertyGroup>
   <PropertyGroup Label="ToolsetOptions">
     <!-- 142 for VS2019(Default);143 for VS2022-->
@@ -101,7 +107,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="AlternativeIncludePaths">
-    <IncludePath>$(SDLDir);$(stbVectorDir);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);%(IncludePath)</IncludePath>
+    <IncludePath>$(SDLDir);$(stbVectorDir);$(RootDirectory)\src;$(WinIncludeRoot);%(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)...\lib\um\x86;$(LibraryPath)</LibraryPath>
@@ -110,8 +116,7 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir Condition="'$(ConfigurationStyle)'=='Debug'">.\Tangaria_Debug\</OutDir>
-    <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\Tangaria_release\</OutDir>
+    <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
     <CustomBuildAfterTargets>BuildCompile</CustomBuildAfterTargets>
   </PropertyGroup>
@@ -136,7 +141,7 @@
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;STB_SPRINTF_IMPLEMENTATION;STB_DS_IMPLEMENTATION</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <CompileAs>Default</CompileAs>
@@ -158,16 +163,14 @@
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <CustomBuildStep>
-      <Command>xcopy  "$(LibDataDir)" "$(OutDir)lib" /s /e /y /d</Command>
+      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d</Command>
     </CustomBuildStep>
     <CustomBuildStep Condition="'$(SDLLibDir)'!=''">
-      <Command>xcopy  "$(SDLLibDir)" "$(OutDir)" /s /e /y /d</Command>
+      <Command>xcopy  "$(SDLLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
     </CustomBuildStep>
-    <!--
     <CustomBuildStep Condition="'$(LibPngDLL)'!=''">
-      <Command>xcopy  "$(LibPngDLL)" "$(OutDir)" /s /e /y /d</Command>
+      <Command>xcopy  "$(LibPngDLL)" "$(OutDLLFolder)" /s /e /y /d</Command>
     </CustomBuildStep>
--->
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
     <ClInclude Include="$(RootDirectory)src\win\png.h" Condition="'$(LibPngDir)'==''">

@@ -39,8 +39,8 @@
     </Otherwise>
   </Choose>
   <PropertyGroup Label="LibraryLocation">
-    <SDLLibDir Condition="'$(Configuration)' != 'ReleaseC99'">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\'))</SDLLibDir>
-    <SDLLibDir Condition="'$(Configuration)' == 'ReleaseC99'">$([System.IO.Path]::GetFullPath('$(SDLDir)Clang$(Platform)\'))</SDLLibDir>
+    <SDLLibDir Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(SDLDir)$(Platform)\'))</SDLLibDir>
+    <SDLLibDir Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(SDLDir)Clang$(Platform)\'))</SDLLibDir>
   </PropertyGroup>
   <!--Now set the definition of the library files-->
   <Choose>

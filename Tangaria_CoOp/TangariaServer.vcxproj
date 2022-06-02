@@ -17,7 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <!--(C89 for ClangToolset C89 Version)-->
     <ProjectConfiguration Include="ReleaseC99|Win32">
       <Configuration>ReleaseC99</Configuration>
       <Platform>Win32</Platform>
@@ -43,7 +42,7 @@
     <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinIncludeRoot>
     <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
     <NetcodeType>WinsockNetcode</NetcodeType>
-    <CStandardType Condition="'$(Configuration)'=='ReleaseC99'">ClangToolset</CStandardType>
+    <CStandardType Condition="'$(Configuration)'=='ReleaseC99' Or '$(Configuration)'=='DebugC99'">ClangToolset</CStandardType>
     <CStandardType Condition="'$(CStandardType)'==''">Modern</CStandardType>
     <stbVectorDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\stb\'))</stbVectorDir>
     <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaServer.vcxproj.user'))</UserProjectSettingsFile>
@@ -68,6 +67,12 @@
     <!--Load LibPng Options-->
     <Import Project="LibPngMacros.props" />
   </ImportGroup>
+  <PropertyGroup Label="OutputDirectoryInfo">
+  	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
+	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
+    <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
+    <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
+  </PropertyGroup>
   <!--Import macro overrides from user props-->
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
   <PropertyGroup Label="ToolsetOptions">
@@ -82,7 +87,7 @@
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Debug'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
@@ -99,7 +104,7 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="AlternativeIncludePaths">
-    <IncludePath>$(stbVectorDir);$(MSBuildProjectDirectory)\src;$(WinIncludeRoot);%(IncludePath)</IncludePath>
+    <IncludePath>$(stbVectorDir);$(RootDirectory)\src;$(WinIncludeRoot);%(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Platform)'=='Win32'">
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)...\lib\um\x86;$(LibraryPath)</LibraryPath>
@@ -108,8 +113,7 @@
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Label="OutputInfo">
-    <OutDir Condition="'$(ConfigurationStyle)'=='Debug'">.\Tangaria_Debug\</OutDir>
-    <OutDir Condition="'$(ConfigurationStyle)'=='Release'">.\Tangaria_release\</OutDir>
+    <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
@@ -131,7 +135,7 @@
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;STB_SPRINTF_IMPLEMENTATION;STB_DS_IMPLEMENTATION;LogServerMessagesOnlyOnError</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;LogServerMessagesOnlyOnError</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <CompileAs>Default</CompileAs>
