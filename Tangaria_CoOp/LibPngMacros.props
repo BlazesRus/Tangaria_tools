@@ -2,15 +2,19 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup>
+    <ZLibPngLibDir Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\'))</ZLibPngLibDir>
+    <ZLibPngLibDir Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)Clang$(Platform)\'))</ZLibPngLibDir>
+  </PropertyGroup>
+  <PropertyGroup>
     <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\zlib-win64\'))</ZLibDir> -->
-    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.lib'))</ZLibLibrary>
-    <ZLibDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\zlib.dll'))</ZLibDLL>
+    <ZLibLibrary>$([System.IO.Path]::GetFullPath('$(ZLibPngLibDir)zlib.lib'))</ZLibLibrary>
+    <ZLibDLL>$([System.IO.Path]::GetFullPath('$(ZLibPngLibDir)zlib.dll'))</ZLibDLL>
   </PropertyGroup>
   <PropertyGroup>
     <!--     <LibPngDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\libpng\'))</LibPngDir> -->
     <!--Define LibPngDir to use non-default LibPng directory-->
-    <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.lib'))</LibPngLibrary>
-    <LibPngDLL>$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\libpng.dll'))</LibPngDLL>
+    <LibPngLibrary>$([System.IO.Path]::GetFullPath('$(ZLibPngLibDir)libpng.lib'))</LibPngLibrary>
+    <LibPngDLL>$([System.IO.Path]::GetFullPath('$(ZLibPngLibDir)libpng.dll'))</LibPngDLL>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemGroup />
