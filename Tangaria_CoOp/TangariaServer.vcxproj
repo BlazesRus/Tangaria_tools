@@ -68,8 +68,8 @@
     <Import Project="LibPngMacros.props" />
   </ImportGroup>
   <PropertyGroup Label="OutputDirectoryInfo">
-  	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
-	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
+    <OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
+    <OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
     <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
     <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
     <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
@@ -117,10 +117,10 @@
   <PropertyGroup Label="OutputInfo">
     <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
+    <CustomBuildBeforeTargets>BuildCompile</CustomBuildBeforeTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
-    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <LinkIncremental>false</LinkIncremental>
@@ -157,6 +157,14 @@
       <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
+    <CustomBuildStep>
+      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d</Command>
+      <Message>Syncing Library Data</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Command>xcopy  "$(ZLibPngLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
+      <Message>Syncing ZLib and LibPng DLLs</Message>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
     <ClInclude Include="$(RootDirectory)src\win\png.h" Condition="'$(LibPngDir)'==''">

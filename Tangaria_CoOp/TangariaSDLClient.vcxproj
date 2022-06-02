@@ -17,7 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <!--(C89 for ClangToolset C89 Version)-->
     <ProjectConfiguration Include="ReleaseC99|Win32">
       <Configuration>ReleaseC99</Configuration>
       <Platform>Win32</Platform>
@@ -120,11 +119,10 @@
   <PropertyGroup Label="OutputInfo">
     <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
-    <CustomBuildAfterTargets>BuildCompile</CustomBuildAfterTargets>
+    <CustomBuildBeforeTargets>BuildCompile</CustomBuildBeforeTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
-    <CustomBuildAfterTargets>Build</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(ConfigurationStyle)'=='Release'">
     <LinkIncremental>false</LinkIncremental>
@@ -166,12 +164,15 @@
     </Link>
     <CustomBuildStep>
       <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d</Command>
+      <Message>Syncing Library Data</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Command>xcopy  "$(ZLibPngLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
+      <Message>Syncing ZLib and LibPng DLLs</Message>
     </CustomBuildStep>
     <CustomBuildStep Condition="'$(SDLLibDir)'!=''">
       <Command>xcopy  "$(SDLLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
-    </CustomBuildStep>
-    <CustomBuildStep Condition="'$(LibPngDLL)'!=''">
-      <Command>xcopy  "$(LibPngDLL)" "$(OutDLLFolder)" /s /e /y /d</Command>
+      <Message>Syncing SDL Based DLLs</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
