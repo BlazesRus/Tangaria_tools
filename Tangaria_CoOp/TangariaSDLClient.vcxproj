@@ -162,7 +162,15 @@
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d
+      <Command>robocopy "$(LibDataDir)customize" "$(OutLibFolder)customize" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)fonts" "$(OutLibFolder)fonts" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)gamedata" "$(OutLibFolder)gamedata" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)help" "$(OutLibFolder)help" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)icons" "$(OutLibFolder)icons" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)music" "$(OutLibFolder)music" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)screens" "$(OutLibFolder)screens" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)sounds" "$(OutLibFolder)sounds" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
+robocopy "$(LibDataDir)tiles" "$(OutLibFolder)tiles" /mir ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
 xcopy  "$(ZPngLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
       <Message>Syncing Lib Data and LibPng Dlls</Message>
     </PreBuildEvent>
