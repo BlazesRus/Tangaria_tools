@@ -70,8 +70,7 @@
   <PropertyGroup Label="OutputDirectoryInfo">
     <OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
     <OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
-    <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
-    <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
+    <OutLibFolder>$([System.IO.Path]::GetFullPath('$(OutDirInfo)lib\'))</OutLibFolder>
     <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -89,13 +88,8 @@
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Debug'" Label="Configuration">
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Release'" Label="Configuration">
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+  <PropertyGroup Label="Configuration" Condition="'$(Platform)'=='x64'">
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -118,6 +112,7 @@
     <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
     <CustomBuildBeforeTargets>BuildCompile</CustomBuildBeforeTargets>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
@@ -157,14 +152,11 @@
       <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
-    <CustomBuildStep>
-      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d</Command>
-      <Message>Syncing Library Data</Message>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Command>xcopy  "$(ZLibPngLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
-      <Message>Syncing ZLib and LibPng DLLs</Message>
-    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d
+xcopy  "$(ZPngLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
+      <Message>Syncing Lib Data and LibPng Dlls</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
     <ClInclude Include="$(RootDirectory)src\win\png.h" Condition="'$(LibPngDir)'==''">

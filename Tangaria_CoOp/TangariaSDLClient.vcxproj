@@ -49,14 +49,18 @@
     <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaSDLClient.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Choose>
-    <When Condition="'$(Configuration)' == 'Debug'">
+    <When Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'ReleaseC99'">
       <PropertyGroup>
-        <ConfigurationStyle>Debug</ConfigurationStyle>
+        <ConfigurationStyle>Release</ConfigurationStyle>
+        <WholeProgramOptimization>true</WholeProgramOptimization>
+        <UseDebugLibraries>false</UseDebugLibraries>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <ConfigurationStyle>Release</ConfigurationStyle>
+        <ConfigurationStyle>Debug</ConfigurationStyle>
+        <LinkIncremental>true</LinkIncremental>
+        <UseDebugLibraries>true</UseDebugLibraries>
       </PropertyGroup>
     </Otherwise>
   </Choose>
@@ -69,8 +73,7 @@
   <PropertyGroup Label="OutputDirectoryInfo">
   	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Debug'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_Debug\'))</OutDirInfo>
 	<OutDirInfo Condition="'$(ConfigurationStyle)'=='Release'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
-    <OutDLLFolder Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)$(Platform)\'))</OutDLLFolder>
-    <OutDLLFolder Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(OutDirInfo)Clang$(Platform)\'))</OutDLLFolder>
+    <OutLibFolder>$([System.IO.Path]::GetFullPath('$(OutDirInfo)lib\'))</OutLibFolder>
     <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
@@ -91,13 +94,8 @@
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(ConfigurationStyle)'=='Release'" Label="Configuration">
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+  <PropertyGroup Label="Configuration" Condition="'$(Platform)'=='x64'">
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -120,6 +118,7 @@
     <OutDir>$(OutDirInfo)</OutDir>
     <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
     <CustomBuildBeforeTargets>BuildCompile</CustomBuildBeforeTargets>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
@@ -139,7 +138,7 @@
       <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(Configuration)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -158,20 +157,17 @@
       <AdditionalDependencies Condition="'$(LibPngLibrary)'!=''">$(LibPngLibrary);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies>%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalDependencies Condition="'$(Configuration)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d
+xcopy  "$(ZPngLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
+      <Message>Syncing Lib Data and LibPng Dlls</Message>
+    </PreBuildEvent>
     <CustomBuildStep>
-      <Command>xcopy  "$(LibDataDir)" "$(OutLibFolder)" /s /e /y /d</Command>
-      <Message>Syncing Library Data</Message>
-    </CustomBuildStep>
-    <CustomBuildStep>
-      <Command>xcopy  "$(ZLibPngLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
-      <Message>Syncing ZLib and LibPng DLLs</Message>
-    </CustomBuildStep>
-    <CustomBuildStep Condition="'$(SDLLibDir)'!=''">
-      <Command>xcopy  "$(SDLLibDir)" "$(OutDLLFolder)" /s /e /y /d</Command>
+      <Command>xcopy  "$(SDLLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
       <Message>Syncing SDL Based DLLs</Message>
     </CustomBuildStep>
   </ItemDefinitionGroup>
