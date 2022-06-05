@@ -171,14 +171,11 @@ robocopy "$(LibDataDir)icons" "$(OutLibFolder)icons" /mir
 robocopy "$(LibDataDir)music" "$(OutLibFolder)music" /mir
 robocopy "$(LibDataDir)screens" "$(OutLibFolder)screens" /mir
 robocopy "$(LibDataDir)sounds" "$(OutLibFolder)sounds" /mir
-robocopy "$(LibDataDir)tiles" "$(OutLibFolder)tiles" /mir 
+robocopy "$(LibDataDir)tiles" "$(OutLibFolder)tiles" /mir
+xcopy  "$(SDLLibDir)" "$(OutDirInfo)" /s /e /y /d 
 xcopy  "$(ZPngLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
-      <Message>Syncing Lib Data and LibPng Dlls</Message>
+      <Message>Syncing Lib Data, Syncing SDL, and LibPng Dlls</Message>
     </PreBuildEvent>
-    <CustomBuildStep>
-      <Command>xcopy  "$(SDLLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
-      <Message>Syncing SDL Based DLLs</Message>
-    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup Label="ImageAndScreenshotStuff">
     <ClInclude Include="$(RootDirectory)src\win\png.h" Condition="'$(LibPngDir)'==''">
