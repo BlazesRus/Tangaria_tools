@@ -24,7 +24,7 @@
 		<SDLNetDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)SDL_net\'))</SDLNetDir>
       </PropertyGroup>
     </When>
-    <When Condition="'$(SDLLibraryType)'=='SDL2'">
+    <When Condition="'$(SDLLibraryType)'=='SDL2' Or '$(SDLLibraryType)'=='GLAD'">
       <PropertyGroup>
         <SDLDir Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2\'))</SDLDir>
         <SDLDir Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(SourceRoot)_SDL2VC\'))</SDLDir>
@@ -70,7 +70,7 @@
         <SDLLibraryType Condition="'$(SDLLibraryType)'!='SDL2'">SDL2</SDLLibraryType>
       </PropertyGroup>
     </When>
-    <When Condition="'$(SDLLibraryType)'=='SDL2'">
+    <When Condition="'$(SDLLibraryType)'=='SDL2' Or '$(SDLLibraryType)'=='GLAD'">
       <PropertyGroup>
         <SDLLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)SDL2.lib'))</SDLLibrary>
         <SDLImageLibrary>$([System.IO.Path]::GetFullPath('$(SDLLibDir)SDL2_image.lib'))</SDLImageLibrary>

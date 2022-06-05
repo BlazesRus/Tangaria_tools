@@ -81,7 +81,7 @@
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
   <PropertyGroup Label="RenameBasedOnSDLAndDebug">
     <TargetName Condition="'$(ConfigurationStyle)'!='Debug' And'$(SDLLibraryType)'=='SDL2'">mangclient_sdl2</TargetName>
-	<TargetName Condition="'$(ConfigurationStyle)'=='Debug'">MAngDebugClient_$(SDLLibraryType)</TargetName>
+    <TargetName Condition="'$(ConfigurationStyle)'=='Debug'">MAngDebugClient_$(SDLLibraryType)</TargetName>
   </PropertyGroup>
   <PropertyGroup Label="ToolsetOptions">
     <!-- 142 for VS2019(Default);143 for VS2022-->
@@ -134,13 +134,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions Condition="'$(CStandardType)'=='Modern'">%(PreprocessorDefinitions);UsingModernC;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(CStandardType)'=='ClangToolset'">%(PreprocessorDefinitions);UsingClangToolset;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL2'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL2' Or '$(SDLLibraryType)'=='GLAD'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
-	  <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">%(PreprocessorDefinitions);_WIN64;WIN64</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">%(PreprocessorDefinitions);_WIN64;WIN64</PreprocessorDefinitions>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;STRICT;WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -383,10 +383,10 @@ xcopy  "$(ZPngLibDir)" "$(OutDirInfo)" /s /e /y /d</Command>
   </ItemGroup>
   <ItemGroup Label="ClientSrc">
     <ClCompile Include="$(RootDirectory)src\client\main-sdl.c">
-      <ExcludedFromBuild Condition="'$(SDLLibraryType)'=='SDL2'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\main-sdl2.c">
-      <ExcludedFromBuild Condition="'$(SDLLibraryType)'=='SDL'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL2'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="$(RootDirectory)src\client\ui-player-properties.c" />
     <ClCompile Include="$(RootDirectory)src\client\c-cmd-obj.c" />
