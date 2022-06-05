@@ -114,6 +114,9 @@
 	<PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
+  <PropertyGroup Label="RenameBasedOnDebug">
+	<TargetName Condition="'$(ConfigurationStyle)'=='Debug'">mangbandDebug</TargetName>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
