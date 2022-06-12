@@ -48,7 +48,7 @@
     <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaServer.vcxproj.user'))</UserProjectSettingsFile>
   </PropertyGroup>
   <Choose>
-    <When Condition="'$(Configuration)' == 'Release' Or '$(Configuration)' == 'ReleaseC99'">
+    <When Condition="'$(Configuration)' == 'Release' Or '$(PlatformToolset)'=='ClangCL'">
       <PropertyGroup>
         <ConfigurationStyle>Release</ConfigurationStyle>
         <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -68,8 +68,8 @@
     <Import Project="LibPngMacros.props" />
   </ImportGroup>
   <PropertyGroup Label="OutputDirectoryInfo">
-    <OutDirInfo Condition="'$(CStandardType)'=='ClangToolset'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_C99Release\'))</OutDirInfo>
-    <OutDirInfo Condition="'$(CStandardType)'!='ClangToolset'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
+    <OutDirInfo Condition="'$(PlatformToolset)'=='ClangCL'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_C99Release\'))</OutDirInfo>
+    <OutDirInfo Condition="'$(PlatformToolset)'!='ClangCL'">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
     <OutLibFolder>$([System.IO.Path]::GetFullPath('$(OutDirInfo)lib\'))</OutLibFolder>
     <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
@@ -78,9 +78,9 @@
   <Import Project="$(UserProjectSettingsFile)" Condition="exists('$(UserProjectSettingsFile)')" />
   <PropertyGroup Label="ToolsetOptions">
     <!-- 142 for VS2019(Default);143 for VS2022-->
-    <PlatformToolset Condition="'$(CStandardType)'=='ClangToolset'">ClangCL</PlatformToolset>
-    <PlatformToolset Condition="'$(CStandardType)'!='ClangToolset' And '$(VisualStudioVersion)' != '17'">v142</PlatformToolset>
-    <PlatformToolset Condition="'$(CStandardType)'!='ClangToolset' And '$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
+    <PlatformToolset Condition="'$(Configuration)' == 'ReleaseC99' Or '$(Configuration)' == 'DebugC99'">ClangCL</PlatformToolset>
+    <PlatformToolset Condition="'$(PlatformToolset)'!='ClangCL' And '$(VisualStudioVersion)' != '17'">v142</PlatformToolset>
+    <PlatformToolset Condition="'$(PlatformToolset)'!='ClangCL' And '$(VisualStudioVersion)' == '17'">v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="GlobalsPart2">
@@ -130,7 +130,7 @@
       <IntrinsicFunctions Condition="'$(ConfigurationStyle)'=='Release'">true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions Condition="'$(CStandardType)'=='Modern'">%(PreprocessorDefinitions);UsingModernC;</PreprocessorDefinitions>
-      <PreprocessorDefinitions Condition="'$(CStandardType)'=='ClangToolset'">%(PreprocessorDefinitions);UsingClangToolset;</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(PlatformToolset)'=='ClangCL'">%(PreprocessorDefinitions);UsingClangToolset;</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>

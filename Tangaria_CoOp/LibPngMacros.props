@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup>
-    <ZPngLibDir Condition="'$(CStandardType)' != 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\'))</ZPngLibDir>
-    <ZPngLibDir Condition="'$(CStandardType)' == 'ClangToolset'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)Clang$(Platform)\'))</ZPngLibDir>
+    <ZPngLibDir Condition="'$(PlatformToolset)'!='ClangCL'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)$(Platform)\'))</ZPngLibDir>
+    <ZPngLibDir Condition="'$(PlatformToolset)'=='ClangCL'">$([System.IO.Path]::GetFullPath('$(WinIncludeRoot)Clang$(Platform)\'))</ZPngLibDir>
   </PropertyGroup>
   <PropertyGroup>
     <!--     <ZLibDir>$([System.IO.Path]::GetFullPath('$(ParentOfTools)\zlib-win64\'))</ZLibDir> -->
