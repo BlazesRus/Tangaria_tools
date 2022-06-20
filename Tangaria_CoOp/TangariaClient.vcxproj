@@ -110,7 +110,7 @@
                 <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </When>
-        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
+        <When Condition="'$(NetcodeType)'=='SDLNet' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
             <PropertyGroup>
                 <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
             </PropertyGroup>
@@ -128,7 +128,7 @@
                 <LibraryPath Condition="'$(Platform)'=='x64'">$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(ZPngLibDir);$(LibraryPath)</LibraryPath>
             </PropertyGroup>
         </When>
-        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or '$(SDLLibraryType)'=='Minimal' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
+        <When Condition="'$(NetcodeType)'=='SDLNet' Or '$(SDLLibraryType)'=='Minimal' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
             <PropertyGroup>
                 <LibraryPath Condition="'$(Platform)'=='Win32'">$(ZPngLibDir);$(LibraryPath)</LibraryPath>
                 <LibraryPath Condition="'$(Platform)'=='x64'">$(ZPngLibDir);$(LibraryPath)</LibraryPath>
@@ -157,8 +157,8 @@
             <PreprocessorDefinitions Condition="$(SDLLibraryType.Contains('SDL2')) Or '$(SDLLibraryType)'=='GLAD'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='GCU'">%(PreprocessorDefinitions);USE_GCU;</PreprocessorDefinitions>
-            <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
-            <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="'$(NetcodeType)'=='SDLNet'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="'$(NetcodeType)'!='SDLNet'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">%(PreprocessorDefinitions);_WIN64;WIN64</PreprocessorDefinitions>
@@ -177,13 +177,13 @@
             <GenerateDebugInformation>true</GenerateDebugInformation>
             <AdditionalDependencies Condition="'$(ZLibLibrary)'!=''">$(ZLibLibrary);%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(LibPngLibrary)'!=''">$(LibPngLibrary);%(AdditionalDependencies)</AdditionalDependencies>
-            <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
-            <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(NetcodeType)'=='SDLNet' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(NetcodeType)'=='SDLNet'">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
             <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
         </Link>
-        <PreBuildEvent Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">
+        <PreBuildEvent Condition="'$(NetcodeType)'=='SDLNet' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">
             <Command>
                 robocopy "$(LibDataDir)customize" "$(OutLibFolder)customize" /mir
                 robocopy "$(LibDataDir)fonts" "$(OutLibFolder)fonts" /mir
@@ -199,7 +199,7 @@
             </Command>
             <Message>Syncing Lib Data, Syncing SDL, and LibPng Dlls</Message>
         </PreBuildEvent>
-        <PreBuildEvent Condition="'$(NetcodeType)'!='UseAlternativeNetcode' And !$(SDLLibraryType.Contains('SDL')) And '$(SDLLibraryType)'!='GLAD'">
+        <PreBuildEvent Condition="'$(NetcodeType)'!='SDLNet' And !$(SDLLibraryType.Contains('SDL')) And '$(SDLLibraryType)'!='GLAD'">
             <Command>
                 robocopy "$(LibDataDir)customize" "$(OutLibFolder)customize" /mir
                 robocopy "$(LibDataDir)fonts" "$(OutLibFolder)fonts" /mir
@@ -311,19 +311,19 @@
         </ClInclude>
     </ItemGroup>
     <ItemGroup Label="ZLibPng">
-        <ClInclude Include="src\win\png.h" />
-        <ClInclude Include="src\win\pngconf.h" />
-        <ClInclude Include="src\win\zconf.h" />
-        <ClInclude Include="src\win\zlib.h" />
+        <ClInclude Include="$(WinRoot)png.h" />
+        <ClInclude Include="$(WinRoot)pngconf.h" />
+        <ClInclude Include="$(WinRoot)zconf.h" />
+        <ClInclude Include="$(WinRoot)zlib.h" />
     </ItemGroup>
     <ItemGroup Label="ImageAndScreenshotStuff">
-        <ClInclude Include="src\win\readdib.h" />
-        <ClInclude Include="src\win\win-menu.h" />
-        <ClInclude Include="src\win\win-term.h" />
-        <ClCompile Include="src\win\readdib.c" />
-        <ClCompile Include="src\win\readpng.c" />
-        <ClCompile Include="src\win\scrnshot.c" />
-        <ClInclude Include="src\win\resource.h" />
+        <ClInclude Include="$(WinRoot)readdib.h" />
+        <ClInclude Include="$(WinRoot)win-menu.h" />
+        <ClInclude Include="$(WinRoot)win-term.h" />
+        <ClCompile Include="$(WinRoot)readdib.c" />
+        <ClCompile Include="$(WinRoot)readpng.c" />
+        <ClCompile Include="$(WinRoot)scrnshot.c" />
+        <ClInclude Include="$(WinRoot)resource.h" />
     </ItemGroup>
     <ItemGroup Label="SPClientExclusiveHeaders">
         <ClInclude Include="src\debug.h">
@@ -688,10 +688,10 @@
         <Image Include="$(RootDirectory)lib\icons\att-256.png" />
         <Image Include="$(RootDirectory)lib\icons\att-32.png" />
         <Image Include="$(RootDirectory)lib\icons\att-512.png" />
-        <Image Include="$(RootDirectory)src\win\angband.ico" />
+        <Image Include="$(WinRoot)angband.ico" />
     </ItemGroup>
     <ItemGroup>
-        <ResourceCompile Include="$(RootDirectory)src\win\MbandClient.rc" />
+        <ResourceCompile Include="$(WinRoot)MbandClient.rc" />
     </ItemGroup>
     <ItemGroup>
         <Text Include="lib\gamedata\activation.txt" />

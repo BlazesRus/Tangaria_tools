@@ -173,25 +173,25 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\win\png.h">
+    <ClInclude Include="$(WinRoot)png.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\zlib.h">
+    <ClInclude Include="$(WinRoot)zlib.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\zconf.h">
+    <ClInclude Include="$(WinRoot)zconf.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\win-term.h">
+    <ClInclude Include="$(WinRoot)win-term.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\win-menu.h">
+    <ClInclude Include="$(WinRoot)win-menu.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\pngconf.h">
+    <ClInclude Include="$(WinRoot)pngconf.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
-    <ClInclude Include="src\win\readdib.h">
+    <ClInclude Include="$(WinRoot)readdib.h">
       <Filter>Header Files\ZLibPng</Filter>
     </ClInclude>
   </ItemGroup>
@@ -535,18 +535,18 @@
     <Image Include="$(RootDirectory)lib\icons\att-512.png">
       <Filter>Resource Files\icons</Filter>
     </Image>
-    <Image Include="$(RootDirectory)src\win\angband.ico">
+    <Image Include="$(RootDirectory)$(WinRoot)angband.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\win\readdib.c">
+    <ClCompile Include="$(WinRoot)readdib.c">
       <Filter>Source Files\ImageAndScreenshotStuff</Filter>
     </ClCompile>
-    <ClCompile Include="src\win\readpng.c">
+    <ClCompile Include="$(WinRoot)readpng.c">
       <Filter>Source Files\ImageAndScreenshotStuff</Filter>
     </ClCompile>
-    <ClCompile Include="src\win\scrnshot.c">
+    <ClCompile Include="$(WinRoot)scrnshot.c">
       <Filter>Source Files\ImageAndScreenshotStuff</Filter>
     </ClCompile>
   </ItemGroup>
@@ -893,7 +893,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="$(RootDirectory)src\win\MbandClient.rc">
+    <ResourceCompile Include="$(RootDirectory)$(WinRoot)MbandClient.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
