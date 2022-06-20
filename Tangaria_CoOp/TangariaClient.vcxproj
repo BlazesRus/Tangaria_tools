@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <ItemGroup Label="ProjectConfigurations">
-        <ProjectConfiguration Include="Debug|x64">
-            <Configuration>Debug</Configuration>
-            <Platform>x64</Platform>
-        </ProjectConfiguration>
-        <ProjectConfiguration Include="Release|x64">
-            <Configuration>Release</Configuration>
-            <Platform>x64</Platform>
-        </ProjectConfiguration>
         <ProjectConfiguration Include="Debug|Win32">
             <Configuration>Debug</Configuration>
             <Platform>Win32</Platform>
@@ -16,6 +8,14 @@
         <ProjectConfiguration Include="Release|Win32">
             <Configuration>Release</Configuration>
             <Platform>Win32</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Debug|x64">
+            <Configuration>Debug</Configuration>
+            <Platform>x64</Platform>
+        </ProjectConfiguration>
+        <ProjectConfiguration Include="Release|x64">
+            <Configuration>Release</Configuration>
+            <Platform>x64</Platform>
         </ProjectConfiguration>
         <ProjectConfiguration Include="ReleaseC99|Win32">
             <Configuration>ReleaseC99</Configuration>
@@ -28,12 +28,12 @@
     </ItemGroup>
     <PropertyGroup Label="Globals">
         <VCProjectVersion>16.0</VCProjectVersion>
-        <ProjectGuid>{04C4E420-C76A-4206-B505-CF5058E7606F}</ProjectGuid>
-        <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+        <ProjectGuid>{1304C40B-728A-448C-8EBF-3A8C562B8CAC}</ProjectGuid>
         <RootNamespace>Mangband</RootNamespace>
-        <ProjectName>TangariaServer</ProjectName>
-        <ConfigurationType>Application</ConfigurationType>
+        <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+        <ProjectName>TangariaClient</ProjectName>
         <CharacterSet>NotSet</CharacterSet>
+        <ConfigurationType>Application</ConfigurationType>
     </PropertyGroup>
     <PropertyGroup Label="UserMacros">
         <ParentOfTools>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\'))</ParentOfTools>
@@ -46,11 +46,11 @@
         <ServerRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\server\'))</ServerRoot>
         <ClientRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\client\'))</ClientRoot>
         <NetcodeType>WinsockNetcode</NetcodeType>
-        <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaServer.vcxproj.user'))</UserProjectSettingsFile>
+        <UserProjectSettingsFile>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)TangariaClient.vcxproj.user'))</UserProjectSettingsFile>
         <OutDirInfo Condition="$(Configuration.Contains('C99'))">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_C99Release\'))</OutDirInfo>
         <OutDirInfo Condition="!$(Configuration.Contains('C99'))">$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\Tangaria_release\'))</OutDirInfo>
         <SDLLibraryType>Default</SDLLibraryType>
-        <ProjAppType>Server</ProjAppType>
+        <ProjAppType>Client</ProjAppType>
     </PropertyGroup>
     <Choose>
         <When Condition="$(Configuration.Contains('Release'))">
@@ -79,8 +79,7 @@
         <OutLibFolder>$([System.IO.Path]::GetFullPath('$(OutDirInfo)lib\'))</OutLibFolder>
         <LocalDebuggerWorkingDirectory>$(OutDirInfo)</LocalDebuggerWorkingDirectory>
         <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-        <TargetName Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">TangariaServer</TargetName>
-        <TargetName Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">TangariaServer_SDLNet</TargetName>
+        <TargetName>MClient_$(SDLLibraryType)</TargetName>
         <TargetName Condition="$(Configuration.Contains('Debug'))">$(TargetName)Debug</TargetName>
     </PropertyGroup>
     <PropertyGroup Label="ToolsetOptions">
@@ -107,7 +106,12 @@
                 <IncludePath>$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </When>
-        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">
+        <When Condition="'$(SDLLibraryType)'=='SDL2WithExtra' Or '$(SDLLibraryType)'=='GLAD'">
+            <PropertyGroup>
+                <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
+            </PropertyGroup>
+        </When>
+        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
             <PropertyGroup>
                 <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
             </PropertyGroup>
@@ -119,7 +123,13 @@
         </Otherwise>
     </Choose>
     <Choose>
-        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or '$(SDLLibraryType)'=='Minimal'">
+        <When Condition="'$(SDLLibraryType)'=='SDL2WithExtra' Or '$(SDLLibraryType)'=='GLAD'">
+            <PropertyGroup>
+                <LibraryPath Condition="'$(Platform)'=='Win32'">$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)...\lib\um\x86;$(ZPngLibDir);$(LibraryPath)</LibraryPath>
+                <LibraryPath Condition="'$(Platform)'=='x64'">$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)...\lib\um\x64;$(ZPngLibDir);$(LibraryPath)</LibraryPath>
+            </PropertyGroup>
+        </When>
+        <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or '$(SDLLibraryType)'=='Minimal' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
             <PropertyGroup>
                 <LibraryPath Condition="'$(Platform)'=='Win32'">$(ZPngLibDir);$(LibraryPath)</LibraryPath>
                 <LibraryPath Condition="'$(Platform)'=='x64'">$(ZPngLibDir);$(LibraryPath)</LibraryPath>
@@ -136,7 +146,6 @@
         <OutDir>$(OutDirInfo)</OutDir>
         <IntDir>.\ObjectFiles\$(ProjectName)\$(Configuration)_$(Platform)\</IntDir>
         <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-        <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
     </PropertyGroup>
     <ItemDefinitionGroup>
         <ClCompile>
@@ -144,14 +153,17 @@
             <FunctionLevelLinking Condition="'$(ConfigurationStyle)'=='Release'">true</FunctionLevelLinking>
             <IntrinsicFunctions Condition="'$(ConfigurationStyle)'=='Release'">true</IntrinsicFunctions>
             <SDLCheck>true</SDLCheck>
-            <PreprocessorDefinitions Condition="'$(CStandardType)'=='Modern'">%(PreprocessorDefinitions);UsingModernC;</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="'$(PlatformToolset)'!='ClangCL'">%(PreprocessorDefinitions);UsingModernC;</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(PlatformToolset)'=='ClangCL'">%(PreprocessorDefinitions);UsingClangToolset;</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="$(SDLLibraryType.Contains('SDL2')) Or '$(SDLLibraryType)'=='GLAD'">%(PreprocessorDefinitions);SOUND_SDL2;USE_SDL2;</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='SDL'">%(PreprocessorDefinitions);SOUND_SDL;USE_SDL;</PreprocessorDefinitions>
+            <PreprocessorDefinitions Condition="'$(SDLLibraryType)'=='GCU'">%(PreprocessorDefinitions);USE_GCU;</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">%(PreprocessorDefinitions);USING_SdlNetcode</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">%(PreprocessorDefinitions);_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Debug'">%(PreprocessorDefinitions);_DEBUG</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(ConfigurationStyle)'=='Release'">%(PreprocessorDefinitions);NDEBUG</PreprocessorDefinitions>
             <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">%(PreprocessorDefinitions);_WIN64;WIN64</PreprocessorDefinitions>
-            <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;WINDOWS;MBandServer;LogServerMessagesOnlyOnError</PreprocessorDefinitions>
+            <PreprocessorDefinitions>%(PreprocessorDefinitions);SOUND;USE_PRIVATE_PATHS;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_CONSOLE;BUILDINGWithVS;WINDOWS;MBandClient</PreprocessorDefinitions>
             <ConformanceMode>true</ConformanceMode>
             <LanguageStandard>stdcpp20</LanguageStandard>
             <CompileAs>Default</CompileAs>
@@ -160,18 +172,19 @@
             <DisableLanguageExtensions Condition="'$(CStandardType)'=='C89'">true</DisableLanguageExtensions>
         </ClCompile>
         <Link>
-            <SubSystem>Console</SubSystem>
+            <SubSystem>Windows</SubSystem>
             <EnableCOMDATFolding Condition="'$(ConfigurationStyle)'=='Release'">true</EnableCOMDATFolding>
             <OptimizeReferences Condition="'$(ConfigurationStyle)'=='Release'">true</OptimizeReferences>
             <GenerateDebugInformation>true</GenerateDebugInformation>
             <AdditionalDependencies Condition="'$(ZLibLibrary)'!=''">$(ZLibLibrary);%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(LibPngLibrary)'!=''">$(LibPngLibrary);%(AdditionalDependencies)</AdditionalDependencies>
-            <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">$(SDLLibrary);$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">%(AdditionalDependencies);$(SDLLibrary);$(SDLImageLibrary);$(SDLMixerLibrary);$(SDLTTFLibrary);$(FreeTypeLibrary);</AdditionalDependencies>
+            <AdditionalDependencies Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">$(SDLNetLibrary);%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Debug'">msimg32.lib;winmm.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
             <AdditionalDependencies Condition="'$(ConfigurationStyle)'=='Release'">msimg32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
             <IgnoreSpecificDefaultLibraries>libcmt.lib</IgnoreSpecificDefaultLibraries>
         </Link>
-        <PreBuildEvent Condition="'$(NetcodeType)'=='UseAlternativeNetcode'">
+        <PreBuildEvent Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GLAD'">
             <Command>
                 robocopy "$(LibDataDir)customize" "$(OutLibFolder)customize" /mir
                 robocopy "$(LibDataDir)fonts" "$(OutLibFolder)fonts" /mir
@@ -187,7 +200,7 @@
             </Command>
             <Message>Syncing Lib Data, Syncing SDL, and LibPng Dlls</Message>
         </PreBuildEvent>
-        <PreBuildEvent Condition="'$(NetcodeType)'!='UseAlternativeNetcode'">
+        <PreBuildEvent Condition="'$(NetcodeType)'!='UseAlternativeNetcode' And !$(SDLLibraryType.Contains('SDL')) And '$(SDLLibraryType)'!='GLAD'">
             <Command>
                 robocopy "$(LibDataDir)customize" "$(OutLibFolder)customize" /mir
                 robocopy "$(LibDataDir)fonts" "$(OutLibFolder)fonts" /mir
@@ -313,6 +326,163 @@
         <ClCompile Include="src\win\scrnshot.c" />
         <ClInclude Include="src\win\resource.h" />
     </ItemGroup>
+    <ItemGroup Label="SPClientExclusiveHeaders">
+        <ClInclude Include="src\debug.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\list-ui-entry-renderers.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\save-charoutput.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-effect.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-entry-combiner.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-entry-init.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-entry-renderers.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-entry.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-equip-cmp.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-help.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-map.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-history.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-mon-list.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-mon-lore.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-obj-list.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-player.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-score.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-signals.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-spoil.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-target.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-visuals.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\ui-wizard.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\wizard.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="src\z-debug.h">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClInclude>
+    </ItemGroup>
+    <ItemGroup Label="SPClientExclusiveSrc">
+        <ClCompile Include="src\cmd-spoil.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\cmd-wizard.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\debug.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\player-class.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\player-race.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\save-charoutput.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-effect.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-entry-combiner.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-entry-renderers.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-entry.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-equip-cmp.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-help.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-history.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-map.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-mon-list.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-mon-lore.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-obj-list.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-player.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-score.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-signals.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-spoil.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-target.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-visuals.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\ui-wizard.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\wiz-debug.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\wiz-spoil.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="src\wiz-stats.c">
+            <ExcludedFromBuild>true</ExcludedFromBuild>
+        </ClCompile>
+    </ItemGroup>
     <ItemGroup Label="CommonHeaders">
         <ClInclude Include="$(CommonRoot)angband.h" />
         <ClInclude Include="$(CommonRoot)bit.h" />
@@ -410,211 +580,108 @@
         <ClCompile Include="$(CommonRoot)z-util.c" />
         <ClCompile Include="$(CommonRoot)z-virt.c" />
     </ItemGroup>
-    <ItemGroup Label="ServerHeaders">
-        <ClInclude Include="$(ServerRoot)alloc.h" />
-        <ClInclude Include="$(ServerRoot)cave.h" />
-        <ClInclude Include="$(ServerRoot)channel.h" />
-        <ClInclude Include="$(ServerRoot)cmds.h" />
-        <ClInclude Include="$(ServerRoot)display-ui.h" />
-        <ClInclude Include="$(ServerRoot)effect-handler.h" />
-        <ClInclude Include="$(ServerRoot)effects-info.h" />
-        <ClInclude Include="$(ServerRoot)effects.h" />
-        <ClInclude Include="$(ServerRoot)game-world.h" />
-        <ClInclude Include="$(ServerRoot)generate.h" />
-        <ClInclude Include="$(ServerRoot)help-ui.h" />
-        <ClInclude Include="$(ServerRoot)hint.h" />
-        <ClInclude Include="$(ServerRoot)history-ui.h" />
-        <ClInclude Include="$(ServerRoot)house.h" />
-        <ClInclude Include="$(ServerRoot)init.h" />
-        <ClInclude Include="$(ServerRoot)list-attack-effects.h" />
-        <ClInclude Include="$(ServerRoot)list-dun-profiles.h" />
-        <ClInclude Include="$(ServerRoot)list-dungeon-flags.h" />
-        <ClInclude Include="$(ServerRoot)list-effects.h" />
-        <ClInclude Include="$(ServerRoot)list-origins.h" />
-        <ClInclude Include="$(ServerRoot)list-randart-properties.h" />
-        <ClInclude Include="$(ServerRoot)list-room-flags.h" />
-        <ClInclude Include="$(ServerRoot)list-rooms.h" />
-        <ClInclude Include="$(ServerRoot)list-terrain-flags.h" />
-        <ClInclude Include="$(ServerRoot)list-wild-feats.h" />
-        <ClInclude Include="$(ServerRoot)mangbandPCH1.h" />
-        <ClInclude Include="$(ServerRoot)map-ui.h" />
-        <ClInclude Include="$(ServerRoot)message.h" />
-        <ClInclude Include="$(ServerRoot)metaclient.h" />
-        <ClInclude Include="$(ServerRoot)mon-attack.h" />
-        <ClInclude Include="$(ServerRoot)mon-blows.h" />
-        <ClInclude Include="$(ServerRoot)mon-desc.h" />
-        <ClInclude Include="$(ServerRoot)mon-group.h" />
-        <ClInclude Include="$(ServerRoot)mon-init.h" />
-        <ClInclude Include="$(ServerRoot)mon-list-ui.h" />
-        <ClInclude Include="$(ServerRoot)mon-list.h" />
-        <ClInclude Include="$(ServerRoot)mon-lore-ui.h" />
-        <ClInclude Include="$(ServerRoot)mon-lore.h" />
-        <ClInclude Include="$(ServerRoot)mon-make.h" />
-        <ClInclude Include="$(ServerRoot)mon-move.h" />
-        <ClInclude Include="$(ServerRoot)mon-msg.h" />
-        <ClInclude Include="$(ServerRoot)mon-predicate.h" />
-        <ClInclude Include="$(ServerRoot)mon-spell.h" />
-        <ClInclude Include="$(ServerRoot)mon-summon.h" />
-        <ClInclude Include="$(ServerRoot)mon-timed.h" />
-        <ClInclude Include="$(ServerRoot)mon-util.h" />
-        <ClInclude Include="$(ServerRoot)monster.h" />
-        <ClInclude Include="$(ServerRoot)netserver.h" />
-        <ClInclude Include="$(ServerRoot)obj-chest.h" />
-        <ClInclude Include="$(ServerRoot)obj-curse.h" />
-        <ClInclude Include="$(ServerRoot)obj-desc.h" />
-        <ClInclude Include="$(ServerRoot)obj-gear.h" />
-        <ClInclude Include="$(ServerRoot)obj-ignore.h" />
-        <ClInclude Include="$(ServerRoot)obj-info.h" />
-        <ClInclude Include="$(ServerRoot)obj-init.h" />
-        <ClInclude Include="$(ServerRoot)obj-inscrip.h" />
-        <ClInclude Include="$(ServerRoot)obj-knowledge.h" />
-        <ClInclude Include="$(ServerRoot)obj-list-ui.h" />
-        <ClInclude Include="$(ServerRoot)obj-list.h" />
-        <ClInclude Include="$(ServerRoot)obj-make.h" />
-        <ClInclude Include="$(ServerRoot)obj-pile.h" />
-        <ClInclude Include="$(ServerRoot)obj-power.h" />
-        <ClInclude Include="$(ServerRoot)obj-properties.h" />
-        <ClInclude Include="$(ServerRoot)obj-randart.h" />
-        <ClInclude Include="$(ServerRoot)obj-slays.h" />
-        <ClInclude Include="$(ServerRoot)obj-ui.h" />
-        <ClInclude Include="$(ServerRoot)obj-util.h" />
-        <ClInclude Include="$(ServerRoot)object.h" />
-        <ClInclude Include="$(ServerRoot)party.h" />
-        <ClInclude Include="$(ServerRoot)player-attack.h" />
-        <ClInclude Include="$(ServerRoot)player-birth.h" />
-        <ClInclude Include="$(ServerRoot)player-calcs.h" />
-        <ClInclude Include="$(ServerRoot)player-history.h" />
-        <ClInclude Include="$(ServerRoot)player-path.h" />
-        <ClInclude Include="$(ServerRoot)player-quest.h" />
-        <ClInclude Include="$(ServerRoot)player-spell.h" />
-        <ClInclude Include="$(ServerRoot)player-timed.h" />
-        <ClInclude Include="$(ServerRoot)player-ui.h" />
-        <ClInclude Include="$(ServerRoot)player-util.h" />
-        <ClInclude Include="$(ServerRoot)player.h" />
-        <ClInclude Include="$(ServerRoot)prefs-ui.h" />
-        <ClInclude Include="$(ServerRoot)project.h" />
-        <ClInclude Include="$(ServerRoot)s-angband.h" />
-        <ClInclude Include="$(ServerRoot)s-util.h" />
-        <ClInclude Include="$(ServerRoot)savefile.h" />
-        <ClInclude Include="$(ServerRoot)sched-win.h" />
-        <ClInclude Include="$(ServerRoot)score-ui.h" />
-        <ClInclude Include="$(ServerRoot)score.h" />
-        <ClInclude Include="$(ServerRoot)store.h" />
-        <ClInclude Include="$(ServerRoot)target-ui.h" />
-        <ClInclude Include="$(ServerRoot)target.h" />
-        <ClInclude Include="$(ServerRoot)trap.h" />
-        <ClInclude Include="$(ServerRoot)visuals-ui.h" />
-        <ClInclude Include="$(ServerRoot)wilderness.h" />
-        <ClInclude Include="$(ServerRoot)z-quark.h" />
-        <ClInclude Include="$(ServerRoot)z-queue.h" />
-        <ClInclude Include="$(ServerRoot)z-textblock.h" />
+    <ItemGroup Label="ClientHeaders">
+        <ClInclude Include="$(ClientRoot)mangclient_sdlPCH1.h" />
+        <ClInclude Include="$(ClientRoot)c-angband.h" />
+        <ClInclude Include="$(ClientRoot)c-cmds.h" />
+        <ClInclude Include="$(ClientRoot)c-option.h" />
+        <ClInclude Include="$(ClientRoot)c-player.h" />
+        <ClInclude Include="$(ClientRoot)cmd-core.h" />
+        <ClInclude Include="$(ClientRoot)conf.h" />
+        <ClInclude Include="$(ClientRoot)game-event.h" />
+        <ClInclude Include="$(ClientRoot)game-input.h" />
+        <ClInclude Include="$(ClientRoot)grafmode.h" />
+        <ClInclude Include="$(ClientRoot)netclient.h" />
+        <ClInclude Include="$(ClientRoot)player-properties.h" />
+        <ClInclude Include="$(ClientRoot)snd-sdl.h">
+            <ExcludedFromBuild Condition="!$(SDLLibraryType.Contains('SDL')) And '$(SDLLibraryType)'!='GLAD'">true</ExcludedFromBuild>
+        </ClInclude>
+        <ClInclude Include="$(ClientRoot)snd-win.h" />
+        <ClInclude Include="$(ClientRoot)sound.h" />
+        <ClInclude Include="$(ClientRoot)ui-birth.h" />
+        <ClInclude Include="$(ClientRoot)ui-command.h" />
+        <ClInclude Include="$(ClientRoot)ui-context.h" />
+        <ClInclude Include="$(ClientRoot)ui-curse.h" />
+        <ClInclude Include="$(ClientRoot)ui-death.h" />
+        <ClInclude Include="$(ClientRoot)ui-display.h" />
+        <ClInclude Include="$(ClientRoot)ui-event.h" />
+        <ClInclude Include="$(ClientRoot)ui-game.h" />
+        <ClInclude Include="$(ClientRoot)ui-init.h" />
+        <ClInclude Include="$(ClientRoot)ui-input.h" />
+        <ClInclude Include="$(ClientRoot)ui-keymap.h" />
+        <ClInclude Include="$(ClientRoot)ui-knowledge.h" />
+        <ClInclude Include="$(ClientRoot)ui-menu.h" />
+        <ClInclude Include="$(ClientRoot)ui-message.h" />
+        <ClInclude Include="$(ClientRoot)ui-object.h" />
+        <ClInclude Include="$(ClientRoot)ui-options.h" />
+        <ClInclude Include="$(ClientRoot)ui-output.h" />
+        <ClInclude Include="$(ClientRoot)ui-prefs.h" />
+        <ClInclude Include="$(ClientRoot)ui-spell.h" />
+        <ClInclude Include="$(ClientRoot)ui-store.h" />
+        <ClInclude Include="$(ClientRoot)ui-term.h" />
+        <ClCompile Include="$(ClientRoot)ui-player-properties.h" />
     </ItemGroup>
-    <ItemGroup Label="ServerSrc">
-        <ClCompile Include="$(ServerRoot)account.c" />
-        <ClCompile Include="$(ServerRoot)cave-map.c" />
-        <ClCompile Include="$(ServerRoot)cave-square.c" />
-        <ClCompile Include="$(ServerRoot)cave-view.c" />
-        <ClCompile Include="$(ServerRoot)cave.c" />
-        <ClCompile Include="$(ServerRoot)channel.c" />
-        <ClCompile Include="$(ServerRoot)cmd-cave.c" />
-        <ClCompile Include="$(ServerRoot)cmd-innate.c" />
-        <ClCompile Include="$(ServerRoot)cmd-misc.c" />
-        <ClCompile Include="$(ServerRoot)cmd-obj.c" />
-        <ClCompile Include="$(ServerRoot)cmd-pickup.c" />
-        <ClCompile Include="$(ServerRoot)control.c" />
-        <ClCompile Include="$(ServerRoot)display-ui.c" />
-        <ClCompile Include="$(ServerRoot)effect-handler-attack.c" />
-        <ClCompile Include="$(ServerRoot)effect-handler-general.c" />
-        <ClCompile Include="$(ServerRoot)effects-info.c" />
-        <ClCompile Include="$(ServerRoot)effects.c" />
-        <ClCompile Include="$(ServerRoot)game-world.c" />
-        <ClCompile Include="$(ServerRoot)gen-cave.c" />
-        <ClCompile Include="$(ServerRoot)gen-chunk.c" />
-        <ClCompile Include="$(ServerRoot)gen-monster.c" />
-        <ClCompile Include="$(ServerRoot)gen-room.c" />
-        <ClCompile Include="$(ServerRoot)gen-util.c" />
-        <ClCompile Include="$(ServerRoot)generate.c" />
-        <ClCompile Include="$(ServerRoot)help-ui.c" />
-        <ClCompile Include="$(ServerRoot)history-ui.c" />
-        <ClCompile Include="$(ServerRoot)house.c" />
-        <ClCompile Include="$(ServerRoot)init.c" />
-        <ClCompile Include="$(ServerRoot)knowledge-ui.c" />
-        <ClCompile Include="$(ServerRoot)load.c" />
-        <ClCompile Include="$(ServerRoot)main.c" />
-        <ClCompile Include="$(ServerRoot)map-ui.c" />
-        <ClCompile Include="$(ServerRoot)message.c" />
-        <ClCompile Include="$(ServerRoot)metaclient.c" />
-        <ClCompile Include="$(ServerRoot)mon-attack.c" />
-        <ClCompile Include="$(ServerRoot)mon-blows.c" />
-        <ClCompile Include="$(ServerRoot)mon-desc.c" />
-        <ClCompile Include="$(ServerRoot)mon-group.c" />
-        <ClCompile Include="$(ServerRoot)mon-init.c" />
-        <ClCompile Include="$(ServerRoot)mon-list-ui.c" />
-        <ClCompile Include="$(ServerRoot)mon-list.c" />
-        <ClCompile Include="$(ServerRoot)mon-lore-ui.c" />
-        <ClCompile Include="$(ServerRoot)mon-lore.c" />
-        <ClCompile Include="$(ServerRoot)mon-make.c" />
-        <ClCompile Include="$(ServerRoot)mon-move.c" />
-        <ClCompile Include="$(ServerRoot)mon-msg.c" />
-        <ClCompile Include="$(ServerRoot)mon-predicate.c" />
-        <ClCompile Include="$(ServerRoot)mon-spell.c" />
-        <ClCompile Include="$(ServerRoot)mon-summon.c" />
-        <ClCompile Include="$(ServerRoot)mon-timed.c" />
-        <ClCompile Include="$(ServerRoot)mon-util.c" />
-        <ClCompile Include="$(ServerRoot)netserver.c" />
-        <ClCompile Include="$(ServerRoot)obj-chest.c" />
-        <ClCompile Include="$(ServerRoot)obj-curse.c" />
-        <ClCompile Include="$(ServerRoot)obj-desc.c" />
-        <ClCompile Include="$(ServerRoot)obj-gear.c" />
-        <ClCompile Include="$(ServerRoot)obj-ignore.c" />
-        <ClCompile Include="$(ServerRoot)obj-info.c" />
-        <ClCompile Include="$(ServerRoot)obj-init.c" />
-        <ClCompile Include="$(ServerRoot)obj-inscrip.c" />
-        <ClCompile Include="$(ServerRoot)obj-knowledge.c" />
-        <ClCompile Include="$(ServerRoot)obj-list-ui.c" />
-        <ClCompile Include="$(ServerRoot)obj-list.c" />
-        <ClCompile Include="$(ServerRoot)obj-make.c" />
-        <ClCompile Include="$(ServerRoot)obj-pile.c" />
-        <ClCompile Include="$(ServerRoot)obj-power.c" />
-        <ClCompile Include="$(ServerRoot)obj-properties.c" />
-        <ClCompile Include="$(ServerRoot)obj-randart.c" />
-        <ClCompile Include="$(ServerRoot)obj-slays.c" />
-        <ClCompile Include="$(ServerRoot)obj-ui.c" />
-        <ClCompile Include="$(ServerRoot)obj-util.c" />
-        <ClCompile Include="$(ServerRoot)party.c" />
-        <ClCompile Include="$(ServerRoot)player-attack.c" />
-        <ClCompile Include="$(ServerRoot)player-birth.c" />
-        <ClCompile Include="$(ServerRoot)player-calcs.c" />
-        <ClCompile Include="$(ServerRoot)player-history.c" />
-        <ClCompile Include="$(ServerRoot)player-path.c" />
-        <ClCompile Include="$(ServerRoot)player-quest.c" />
-        <ClCompile Include="$(ServerRoot)player-spell.c" />
-        <ClCompile Include="$(ServerRoot)player-timed.c" />
-        <ClCompile Include="$(ServerRoot)player-ui.c" />
-        <ClCompile Include="$(ServerRoot)player-util.c" />
-        <ClCompile Include="$(ServerRoot)player.c" />
-        <ClCompile Include="$(ServerRoot)prefs-ui.c" />
-        <ClCompile Include="$(ServerRoot)project-feat.c" />
-        <ClCompile Include="$(ServerRoot)project-mon.c" />
-        <ClCompile Include="$(ServerRoot)project-obj.c" />
-        <ClCompile Include="$(ServerRoot)project-player.c" />
-        <ClCompile Include="$(ServerRoot)project.c" />
-        <ClCompile Include="$(ServerRoot)s-util.c" />
-        <ClCompile Include="$(ServerRoot)save.c" />
-        <ClCompile Include="$(ServerRoot)savefile.c" />
-        <ClCompile Include="$(ServerRoot)sched-unix.c" />
-        <ClCompile Include="$(ServerRoot)sched-win.c" />
-        <ClCompile Include="$(ServerRoot)score-ui.c" />
-        <ClCompile Include="$(ServerRoot)score.c" />
-        <ClCompile Include="$(ServerRoot)store.c" />
-        <ClCompile Include="$(ServerRoot)target-ui.c" />
-        <ClCompile Include="$(ServerRoot)target.c" />
-        <ClCompile Include="$(ServerRoot)trap.c" />
-        <ClCompile Include="$(ServerRoot)visuals-ui.c" />
-        <ClCompile Include="$(ServerRoot)wilderness.c" />
-        <ClCompile Include="$(ServerRoot)z-quark.c" />
-        <ClCompile Include="$(ServerRoot)z-queue.c" />
-        <ClCompile Include="$(ServerRoot)z-textblock.c" />
+    <ItemGroup Label="ClientSrc">
+        <ClCompile Include="$(ClientRoot)ui-player-properties.c" />
+        <ClCompile Include="$(ClientRoot)c-cmd-obj.c" />
+        <ClCompile Include="$(ClientRoot)c-cmd.c" />
+        <ClCompile Include="$(ClientRoot)c-option.c" />
+        <ClCompile Include="$(ClientRoot)c-player.c" />
+        <ClCompile Include="$(ClientRoot)cmd-core.c" />
+        <ClCompile Include="$(ClientRoot)conf.c" />
+        <ClCompile Include="$(ClientRoot)game-event.c" />
+        <ClCompile Include="$(ClientRoot)game-input.c" />
+        <ClCompile Include="$(ClientRoot)grafmode.c" />
+        <ClCompile Include="$(ClientRoot)netclient.c" />
+        <ClCompile Include="$(ClientRoot)player-properties.c" />
+        <ClCompile Include="$(ClientRoot)set_focus.c" />
+        <ClCompile Include="$(ClientRoot)snd-sdl.c" />
+        <ClCompile Include="$(ClientRoot)snd-win.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL' And '$(SDLLibraryType)'!='SDL2'">true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="$(ClientRoot)sound-core.c" />
+        <ClCompile Include="$(ClientRoot)ui-birth.c" />
+        <ClCompile Include="$(ClientRoot)ui-command.c" />
+        <ClCompile Include="$(ClientRoot)ui-context.c" />
+        <ClCompile Include="$(ClientRoot)ui-curse.c" />
+        <ClCompile Include="$(ClientRoot)ui-death.c" />
+        <ClCompile Include="$(ClientRoot)ui-display.c" />
+        <ClCompile Include="$(ClientRoot)ui-event.c" />
+        <ClCompile Include="$(ClientRoot)ui-game.c" />
+        <ClCompile Include="$(ClientRoot)ui-init.c" />
+        <ClCompile Include="$(ClientRoot)ui-input.c" />
+        <ClCompile Include="$(ClientRoot)ui-keymap.c" />
+        <ClCompile Include="$(ClientRoot)ui-knowledge.c" />
+        <ClCompile Include="$(ClientRoot)ui-menu.c" />
+        <ClCompile Include="$(ClientRoot)ui-message.c" />
+        <ClCompile Include="$(ClientRoot)ui-object.c" />
+        <ClCompile Include="$(ClientRoot)ui-options.c" />
+        <ClCompile Include="$(ClientRoot)ui-output.c" />
+        <ClCompile Include="$(ClientRoot)ui-prefs.c" />
+        <ClCompile Include="$(ClientRoot)ui-spell.c" />
+        <ClCompile Include="$(ClientRoot)ui-store.c" />
+        <ClCompile Include="$(ClientRoot)ui-term.c" />
+        <ClCompile Include="$(ClientRoot)win-layout.c" />
+    </ItemGroup>
+    <ItemGroup Label="MainClientProcessing">
+        <ClInclude Include="$(ClientRoot)main.h">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL' And '$(SDLLibraryType)'!='SDL2'">true</ExcludedFromBuild>
+        </ClInclude>
+        <ClCompile Include="$(ClientRoot)main.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL' And '$(SDLLibraryType)'!='SDL2'">true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="$(ClientRoot)main-win.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'=='SDL' Or '$(SDLLibraryType)'=='SDL2'">true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="$(ClientRoot)main-gcu.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='GCU'">true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="$(ClientRoot)main-sdl.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL'">true</ExcludedFromBuild>
+        </ClCompile>
+        <ClCompile Include="$(ClientRoot)main-sdl2.c">
+            <ExcludedFromBuild Condition="'$(SDLLibraryType)'!='SDL2'">true</ExcludedFromBuild>
+        </ClCompile>
     </ItemGroup>
     <ItemGroup>
         <Image Include="$(RootDirectory)lib\icons\att-128.png" />
@@ -622,10 +689,10 @@
         <Image Include="$(RootDirectory)lib\icons\att-256.png" />
         <Image Include="$(RootDirectory)lib\icons\att-32.png" />
         <Image Include="$(RootDirectory)lib\icons\att-512.png" />
-        <Image Include="$(RootDirectory)src\win\tangaria.ico" />
+        <Image Include="$(RootDirectory)src\win\angband.ico" />
     </ItemGroup>
     <ItemGroup>
-        <ResourceCompile Include="$(RootDirectory)src\win\AngbandServer.rc" />
+        <ResourceCompile Include="$(RootDirectory)src\win\MbandClient.rc" />
     </ItemGroup>
     <ItemGroup>
         <Text Include="lib\gamedata\activation.txt" />

@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mangband", "TangariaServer.vcxproj", "{04C4E420-C76A-4206-B505-CF5058E7606F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TangariaServer", "TangariaServer.vcxproj", "{04C4E420-C76A-4206-B505-CF5058E7606F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mangclient_sdl", "TangariaSDLClient.vcxproj", "{1304C40B-728A-448C-8EBF-3A8C562B8CAC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TangariaClient", "TangariaClient.vcxproj", "{1304C40B-728A-448C-8EBF-3A8C562B8CAC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExternalLibraryProjects", "ExternalLibraryProjects", "{06CCF369-80B3-4E01-8D26-4C699256289D}"
 EndProject
