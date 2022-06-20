@@ -41,7 +41,6 @@
         <SourceRoot>$([System.IO.Path]::GetFullPath('$(RootDirectory)\src\'))</SourceRoot>
         <LibDataDir>$([System.IO.Path]::GetFullPath('$(RootDirectory)\lib\'))</LibDataDir>
         <WinRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\win\'))</WinRoot>
-        <WinIncludeRoot>$([System.IO.Path]::GetFullPath('$(WinRoot)\include\'))</WinIncludeRoot>
         <CommonRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\common\'))</CommonRoot>
         <ServerRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\server\'))</ServerRoot>
         <ClientRoot>$([System.IO.Path]::GetFullPath('$(SourceRoot)\client\'))</ClientRoot>
@@ -103,22 +102,22 @@
     <Choose>
         <When Condition="'$(SDLLibraryType)'=='Minimal'">
             <PropertyGroup>
-                <IncludePath>$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
+                <IncludePath>$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </When>
         <When Condition="'$(SDLLibraryType)'=='SDL2WithExtra' Or '$(SDLLibraryType)'=='GLAD'">
             <PropertyGroup>
-                <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
+                <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </When>
         <When Condition="'$(NetcodeType)'=='UseAlternativeNetcode' Or $(SDLLibraryType.Contains('SDL')) Or '$(SDLLibraryType)'=='GCU'">
             <PropertyGroup>
-                <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
+                <IncludePath>$(SDLDir);$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </When>
         <Otherwise>
             <PropertyGroup>
-                <IncludePath>$(SourceRoot);$(WinRoot);$(WinIncludeRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
+                <IncludePath>$(SourceRoot);$(WinRoot);$(CommonRoot);$(ClientRoot);$(VC_IncludePath);$(WindowsSDK_IncludePath);%(IncludePath)</IncludePath>
             </PropertyGroup>
         </Otherwise>
     </Choose>
