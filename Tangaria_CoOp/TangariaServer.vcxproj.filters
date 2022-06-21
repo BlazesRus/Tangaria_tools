@@ -13,17 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Resource Files\customize">
-      <UniqueIdentifier>{50814ac9-de77-42f7-90e1-c49769a526f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\fonts">
-      <UniqueIdentifier>{f2ce99a0-ec94-4adf-9ed7-876afce2d4d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\gamedata">
       <UniqueIdentifier>{14f36840-4171-45cc-85c3-1c40b9dbb45f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\help">
-      <UniqueIdentifier>{2f230f9e-eca0-4db4-9b56-71de201fb1c9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\icons">
       <UniqueIdentifier>{baf73d3c-6656-4a0a-99a4-d046b7faf4e6}</UniqueIdentifier>
@@ -46,12 +37,6 @@
     <Filter Include="Resource Files\tiles\nomad">
       <UniqueIdentifier>{d9cb6d85-e632-4317-8428-5f916f278f2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\sounds">
-      <UniqueIdentifier>{4b4d88d3-5088-4dc2-81c4-151dbacc7987}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\screens">
-      <UniqueIdentifier>{8a54c5c2-3c10-4cf2-b6a8-9588ab62a502}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Server">
       <UniqueIdentifier>{e13bc4c4-31e6-4d1a-b8f6-7643057565be}</UniqueIdentifier>
     </Filter>
@@ -70,15 +55,18 @@
     <Filter Include="Source Files\ImageAndScreenshotStuff">
       <UniqueIdentifier>{7db14429-c0c6-4560-a26a-74486b4e99e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SDL">
+      <UniqueIdentifier>{518d22ef-d6c5-472f-847a-46239ed9e52b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(SDLDir)\SDL.h">
-      <Filter>SDL</Filter>
-    </ClInclude>
     <ClInclude Include="$(SDLDir)\begin_code.h">
-      <Filter>SDL</Filter>
+      <Filter>Resource Files\gamedata</Filter>
     </ClInclude>
     <ClInclude Include="$(SDLDir)\close_code.h">
+      <Filter>Resource Files\gamedata</Filter>
+    </ClInclude>
+    <ClInclude Include="$(SDLDir)\SDL.h">
       <Filter>SDL</Filter>
     </ClInclude>
     <ClInclude Include="$(SDLDir)\SDL_active.h">
@@ -164,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="$(SDLDir)\SDL_video.h">
       <Filter>SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="$(WinRoot)resource.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -684,9 +675,6 @@
     <ClInclude Include="$(ServerRoot)z-textblock.h">
       <Filter>Header Files\Server</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files\Server</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(WinRoot)readdib.c">
@@ -1097,27 +1085,158 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="$(RootDirectory)lib\icons\att-128.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="$(RootDirectory)lib\icons\att-16.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="$(RootDirectory)lib\icons\att-256.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="$(RootDirectory)lib\icons\att-32.png">
+    <Image Include="$(WinRoot)tangaria.ico">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="$(RootDirectory)lib\icons\att-512.png">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\icons</Filter>
     </Image>
-    <Image Include="$(RootDirectory)$(WinRoot)tangaria.ico">
-      <Filter>Resource Files</Filter>
+    <Image Include="$(RootDirectory)lib\icons\att-16.png">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="$(RootDirectory)lib\icons\att-32.png">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="$(RootDirectory)lib\icons\att-128.png">
+      <Filter>Resource Files\icons</Filter>
+    </Image>
+    <Image Include="$(RootDirectory)lib\icons\att-256.png">
+      <Filter>Resource Files\icons</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="$(RootDirectory)$(WinRoot)AngbandServer.rc">
+    <Text Include="$(RootDirectory)lib\gamedata\activation.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\artifact.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\blow_effects.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\blow_methods.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\body.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\brand.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\chest_trap.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\class.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\constants.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\curse.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\dungeon_profile.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\ego_item.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\flavor.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\hints.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\history.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\monster.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\monster_base.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\monster_spell.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\names.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\object.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\object_base.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\object_property.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\p_race.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\pain.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\pit.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\player_property.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\player_timed.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\projection.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\quest.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\realm.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\room_template.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\world.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\shape.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\slay.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\store.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\summon.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\terrain.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\trap.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\ui_entry.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\ui_entry_base.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\ui_entry_renderer.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\vault.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+    <Text Include="$(RootDirectory)lib\gamedata\visuals.txt">
+      <Filter>Resource Files\gamedata</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(WinRoot)AngbandServer.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
